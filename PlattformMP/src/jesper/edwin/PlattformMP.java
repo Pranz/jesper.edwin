@@ -5,7 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics; 
 import org.newdawn.slick.SlickException; 
 import org.newdawn.slick.AppGameContainer; 
-//test
+
 
 public class PlattformMP extends BasicGame { 
 	public PlattformMP() { 
@@ -26,6 +26,7 @@ public class PlattformMP extends BasicGame {
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
 		g.drawString("GameObject: " + GameObject.list.size(), 0, 100); 
 		g.drawString("VisualObject: " + VisualObject.list.size(), 0, 120); 
+		g.drawString("Github GOGOGOGOGo", 0, 140);
 	} 
 	
 	
