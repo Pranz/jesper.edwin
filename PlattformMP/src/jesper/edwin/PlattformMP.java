@@ -26,8 +26,7 @@ public class PlattformMP extends BasicGame {
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
 		g.drawString("GameObject: " + GameObject.list.size(), 0, 100); 
 		g.drawString("VisualObject: " + VisualObject.list.size(), 0, 120); 
-		g.drawString("Github GOGOGOGOGo", 0, 140);
-		//PARTY HARD
+		g.drawString("Github GOGOGOGOGo FÖR DET ÄR JAG SOM HAR STORA TOALETTRULLAR!!!!!!2!11!!11111!!!!1!!!111!1!!1", 0, 140);
 	} 
 	
 	
