@@ -27,6 +27,7 @@ public class PlattformMP extends BasicGame {
 		g.drawString("GameObject: " + GameObject.list.size(), 0, 100); 
 		g.drawString("VisualObject: " + VisualObject.list.size(), 0, 120); 
 		g.drawString("Github GOGOGOGOGo", 0, 140);
+		//PARTY HARD
 	} 
 	
 	
