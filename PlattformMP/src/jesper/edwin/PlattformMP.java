@@ -3,6 +3,7 @@ package jesper.edwin;
 import org.newdawn.slick.BasicGame; 
 import org.newdawn.slick.GameContainer; 
 import org.newdawn.slick.Graphics; 
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException; 
 import org.newdawn.slick.AppGameContainer; 
 
@@ -13,9 +14,7 @@ public class PlattformMP extends BasicGame {
 		} 
 	
 	@Override public void init(GameContainer container) throws SlickException {
-		new GameObject();
-		new GameObject();
-		new VisualObject();
+		new VisualObject(new Image(System.getProperty("user.dir") + "/resources/image/player.png"), 140, 70);
 		
 	} 
 	
@@ -26,8 +25,12 @@ public class PlattformMP extends BasicGame {
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
 		g.drawString("GameObject: " + GameObject.list.size(), 0, 100); 
 		g.drawString("VisualObject: " + VisualObject.list.size(), 0, 120); 
-		g.drawString("Github GOGOGOGOGo FÖR DET ÄR JAG SOM HAR STORA TOALETTRULLAR!!!!!!2!11!!11111!!!!1!!!111!1!!1", 0, 140);
-		g.drawString("^ Lite lång text....", 0, 160);
+		//tog bort all onödig skit för tillfället
+		
+		//kod som ritar ut alla VisualObject.
+		for(VisualObject o : VisualObject.list){
+			g.drawImage(o.image, (int)(o.x), (int)(o.y));
+		}
 	} 
 	
 	
