@@ -1,14 +1,21 @@
 package jesper.edwin; 
 
-import org.newdawn.slick.*; 
 
+import org.newdawn.slick.*; 
 
 
 public class PlattformMP extends BasicGame { 
 	
 	VisualObject player;
 	
-	private final String IMAGE_DIR = System.getProperty("user.dir") + "/resources/image/";
+	static boolean PAUSE = false;
+	
+	private final String WORK_DIR =System.getProperty("user.dir");
+	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
+	
+	Console console = new Console();
+	
+	Keyboard keyboard = new Keyboard();
 
 	
 	public PlattformMP() { 
@@ -17,43 +24,73 @@ public class PlattformMP extends BasicGame {
 	
 	@Override public void init(GameContainer container) throws SlickException {
 		
-		VisualObject player = new VisualObject(new Image(IMAGE_DIR + "player.png"), 140, 70);
+		player = new VisualObject(new Image(IMAGE_DIR + "player.png"), 140, 70);
 		container.setTargetFrameRate(100);
 	} 
 	
 	@Override public void update(GameContainer container, int delta) throws SlickException {
-		handleInput(container);
+		if(!PlattformMP.PAUSE){
+			handleInput(container);
+		}
+		else pauseUpdate();
 	} 
 	
+	public void pauseUpdate(){
+		
+	}
+	
+	
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
+		
+		for(VisualObject o : VisualObject.list){
+			g.drawImage(o.image, (int)(o.x), (int)(o.y));
+		}
 		
 		g.drawString("GameObject: " + GameObject.list.size(), 0, 100); 
 		g.drawString("VisualObject: " + VisualObject.list.size(), 0, 120); 
 		//tog bort all onödig skit för tillfället
 		
-		//kod som ritar ut alla VisualObject
-		for(VisualObject o : VisualObject.list){
-			g.drawImage(o.image, (int)(o.x), (int)(o.y));
-		}
+		
+		if(Console.isOn){
+			g.drawString("> " + Console.input, 6, 480-20);
+			}
+
 	} 
 	
 	
 	public static void main(String[] args) { 
 		try { 
-			AppGameContainer app = new AppGameContainer(new PlattformMP()); app.start();
+			AppGameContainer app = new AppGameContainer(new PlattformMP()); 
+			app.start();
 			} 
 		catch (SlickException e) { 
 			e.printStackTrace(); } 
 		} 
 	
-	protected void handleInput(GameContainer container){
+	/*
+	 * protected void handleInput(GameContainer container){
 		Input input = container.getInput();
 		
 		if(input.isKeyDown(Input.KEY_LEFT)){
-			player.x -= 2;
+			player.move(-2, 0);
 		}
 		
+		if(input.isKeyDown(Input.KEY_RIGHT)){
+			player.move(2, 0);
+		}
 		
+		if(input.isKeyDown(Input.KEY_DOWN)){
+			player.move(0, 2);
+		}
+		
+		if(input.isKeyDown(Input.KEY_UP)){
+			player.move(0, -2);
+		}
+	}
+	*/
+	
+	private void handleInput(GameContainer gc) throws SlickException {
+		gc.getInput().addKeyListener(keyboard);
 	}
 	
-	}
+}

@@ -3,7 +3,7 @@ package jesper.edwin;
 import java.util.List;
 import java.util.ArrayList;
 
-public class GameObject {
+public abstract class GameObject {
 	
 	double x;
 	double y;
@@ -14,6 +14,11 @@ public class GameObject {
 		list.add(this);
 		this.x = x;
 		this.y = y;
+	}
+	
+	public void move(int x, int y){
+		this.x += x;
+		this.y += y;
 	}
 
 }
