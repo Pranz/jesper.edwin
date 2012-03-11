@@ -2,13 +2,14 @@ package jesper.edwin;
 
 
 
-public class Console {
+public class Console extends GameObject {
 	
 	public static boolean isOn = false;
 	public static String input = "";
 	public static String output = "";
 	private static int outputLines = 0;
 	private static int outputMaxLines = 6;
+	private final static int SPACE = 10;
 	
 	public enum Command{
 		test, shit
@@ -36,7 +37,8 @@ public class Console {
 			outputLines++;
 		else
 			output=output.substring(output.indexOf((char)10)+1);
-		output+=str+((char)10);
+		
+		output += str + ((char)SPACE);
 	}
 	
 	public static void executeCommand(String str){
@@ -52,6 +54,7 @@ public class Console {
 							_str+="["+i+"]="+command[i]+"; ";
 						outputConsole(_str);
 						break;
+						
 					case shit:
 						outputConsole("Yes shit");
 						break;

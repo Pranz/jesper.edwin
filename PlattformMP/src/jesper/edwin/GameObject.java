@@ -5,20 +5,27 @@ import java.util.ArrayList;
 
 public abstract class GameObject {
 	
-	double x;
-	double y;
 	
 	static List<GameObject> list = new ArrayList<GameObject>();
+	static List<GameObject> removeList = new ArrayList<GameObject>();
 	
-	public GameObject(double x, double y){
+	public GameObject(){
 		list.add(this);
-		this.x = x;
-		this.y = y;
+	}
+
+	
+	public void update(){
+		
 	}
 	
-	public void move(int x, int y){
-		this.x += x;
-		this.y += y;
+	public void destroy(){
+
+		removeList.add(this);
+
+	}
+	
+	public void callAlarm(int number){
+		
 	}
 
 }
