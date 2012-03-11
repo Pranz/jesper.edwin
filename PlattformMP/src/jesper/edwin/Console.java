@@ -9,7 +9,7 @@ public class Console {
 	public static String output = "";
 	private static int outputLines = 0;
 	private static int outputMaxLines = 6;
-	private final static int SPACE = 10;
+	private final static int NEWLINE = 10;
 	
 	public enum Command{
 		test, shit
@@ -38,12 +38,12 @@ public class Console {
 		else
 			output=output.substring(output.indexOf((char)10)+1);
 		
-		output += str + ((char)SPACE);
+		output += str + ((char)NEWLINE);
 	}
 	
 	public static void executeCommand(String str){
 		if(str!=""){
-			outputConsole(">>"+str);
+			outputConsole("> "+str);
 			String[] command = str.split(" ");
 			if(stringEqualsCommand(command[0].toLowerCase())){
 				
@@ -71,5 +71,4 @@ public class Console {
 		}
 		return false;
     }
-
 }

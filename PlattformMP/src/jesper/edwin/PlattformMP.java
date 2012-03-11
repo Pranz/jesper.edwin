@@ -14,8 +14,8 @@ public class PlattformMP extends BasicGame {
 	
 	static boolean PAUSE = false;
 	
-	private final int FPS = 100;
-	private final int WINDOW_LENGTH = 640;
+	private final int FPS = 60;
+	private final int WINDOW_WIDTH = 640;
 	private final int WINDOW_HEIGHT = 480;
 	private final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
@@ -103,12 +103,12 @@ public class PlattformMP extends BasicGame {
 	
 	private void drawConsole(Graphics g){
 		g.setColor(Color.darkGray);
-		g.fillRect(0,480-20,640,480);
+		g.fillRect(0,WINDOW_HEIGHT-20,WINDOW_WIDTH,WINDOW_HEIGHT);
 		String[] consoleOut = Console.output.split(Character.toString((char)10));
 		for(int i=0;i<consoleOut.length;i++)
 			g.drawString(consoleOut[i], 6, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20));
 		g.setColor(Color.white);
-		g.drawString("> " + Console.input, 6, 480-20);
+		g.drawString("> " + Console.input, 6, WINDOW_HEIGHT-20);
 		g.drawLine(26+Console.input.length()*9, WINDOW_HEIGHT-20+2, 26+Console.input.length()*9, WINDOW_HEIGHT-2);
 	}
 	
