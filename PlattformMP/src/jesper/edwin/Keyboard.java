@@ -4,7 +4,7 @@ package jesper.edwin;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 
-public class Keyboard extends GameObject implements KeyListener {
+public class Keyboard implements KeyListener {
 	
 	public Keyboard(){
 		

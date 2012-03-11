@@ -11,7 +11,6 @@ public class VisualObject extends GameObject {
 	double y;
 	
 	static List<VisualObject> list = new ArrayList<VisualObject>();
-	static List<VisualObject> removeList = new ArrayList<VisualObject>();
 	
 	public VisualObject(Image image, double x, double y){
 		super();
@@ -27,15 +26,16 @@ public class VisualObject extends GameObject {
 		this.y += y;
 	}
 	
-	@Override public void callAlarm(int number){
+	@Override public void callAlarm(int number, Alarm alarm){
 		if(number == 0){
 			System.out.println("Success");
+			alarm.loop();
 		}
 	}
 	
 	@Override public void destroy(){
 		super.destroy();
-		removeList.add(this);
+		list.remove(this);
 	}
 	
 

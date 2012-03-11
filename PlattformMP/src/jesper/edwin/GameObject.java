@@ -7,7 +7,6 @@ public abstract class GameObject {
 	
 	
 	static List<GameObject> list = new ArrayList<GameObject>();
-	static List<GameObject> removeList = new ArrayList<GameObject>();
 	
 	public GameObject(){
 		list.add(this);
@@ -20,11 +19,11 @@ public abstract class GameObject {
 	
 	public void destroy(){
 
-		removeList.add(this);
+		list.remove(this);
 
 	}
 	
-	public void callAlarm(int number){
+	public void callAlarm(int number, Alarm alarm){
 		
 	}
 

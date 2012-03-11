@@ -39,9 +39,7 @@ public class PlattformMP extends BasicGame {
 				o.update();
 			}
 			
-			for(GameObject o : GameObject.removeList){
-				GameObject.list.remove(o);
-			}
+			
 		}
 		else pauseUpdate();
 	} 

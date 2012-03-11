@@ -2,7 +2,7 @@ package jesper.edwin;
 
 
 
-public class Console extends GameObject {
+public class Console {
 	
 	public static boolean isOn = false;
 	public static String input = "";

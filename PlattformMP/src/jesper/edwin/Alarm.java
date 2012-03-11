@@ -6,7 +6,6 @@ import java.util.List;
 public class Alarm extends GameObject {
 	
 	static List<Alarm> list = new ArrayList<Alarm>();
-	static List<Alarm> removeList = new ArrayList<Alarm>();
 	
 	int counter = 0;
 	int ticks;
@@ -23,8 +22,7 @@ public class Alarm extends GameObject {
 	
 	@Override public void update(){
 		if(counter >= ticks){
-			host.callAlarm(number);
-			//loop();
+			host.callAlarm(number, this);
 			destroy();
 		}
 		counter++;
@@ -32,7 +30,7 @@ public class Alarm extends GameObject {
 	}
 	
 	@Override public void destroy(){
-		removeList.add(this);
+		list.remove(this);
 		super.destroy();
 	}
 	
