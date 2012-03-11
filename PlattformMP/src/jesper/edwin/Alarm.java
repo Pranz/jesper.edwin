@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Alarm extends GameObject {
+	/*
+	 * Alarm, timer.
+	 * Currently, if any superclass to the class that makes an alarm
+	 * got a alarm with the same number, both alarm functions will be called.
+	 */
 	
 	static List<Alarm> list = new ArrayList<Alarm>();
 	
