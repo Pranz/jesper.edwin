@@ -52,9 +52,15 @@ public class PlattformMP extends BasicGame {
 		
 		
 		if(Console.isOn){
+			g.setColor(Color.darkGray);
+			g.fillRect(0,480-20,640,480);
+			String[] consoleOut=Console.output.split(Character.toString((char)10));
+			for(int i=0;i<consoleOut.length;i++)
+				g.drawString(consoleOut[i], 6, 480-20-((consoleOut.length-i)*20));
+			g.setColor(Color.white);
 			g.drawString("> " + Console.input, 6, 480-20);
+			g.drawLine(26+Console.input.length()*9, 480-20+2, 26+Console.input.length()*9, 480-2);
 			}
-
 	} 
 	
 	

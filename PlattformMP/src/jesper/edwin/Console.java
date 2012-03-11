@@ -6,9 +6,12 @@ public class Console {
 	
 	public static boolean isOn = false;
 	public static String input = "";
+	public static String output = "";
+	private static int outputLines = 0;
+	private static int outputMaxLines = 6;
 	
 	public enum Command{
-		getdemand, getsupply
+		test, shit
 	}
 	
 	public Console(){
@@ -28,18 +31,33 @@ public class Console {
 		PlattformMP.PAUSE = false;
 	}
 	
+	public static void outputConsole(String str){
+		if(outputLines<outputMaxLines)
+			outputLines++;
+		else
+			output=output.substring(output.indexOf((char)10)+1);
+		output+=str+((char)10);
+	}
+	
 	public static void executeCommand(String str){
-		String[] command = str.split(" ");
-		if(stringEqualsCommand(command[0].toLowerCase())){
-			
-			switch(Command.valueOf(command[0])){
+		if(str!=""){
+			outputConsole(">>"+str);
+			String[] command = str.split(" ");
+			if(stringEqualsCommand(command[0].toLowerCase())){
 				
-			case getdemand:
-
-			
+				switch(Command.valueOf(command[0])){
+					case test:
+						String _str="";
+						for(int i=0;i<command.length;i++)
+							_str+="["+i+"]="+command[i]+"; ";
+						outputConsole(_str);
+						break;
+					case shit:
+						outputConsole("Yes shit");
+						break;
+				}
 			}
 		}
-		
 	}
 	
 	

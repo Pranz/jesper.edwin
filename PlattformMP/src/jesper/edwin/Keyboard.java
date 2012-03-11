@@ -58,8 +58,9 @@ public class Keyboard implements KeyListener {
 
 	}
 
+	
 	@Override
-	public void keyReleased(int arg0, char arg1) {
+	public void keyReleased(int key, char c) {
 		// TODO Auto-generated method stub
 
 	}
