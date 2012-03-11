@@ -68,7 +68,7 @@ public class PlattformMP extends BasicGame {
 		} 
 	
 	/*
-	 * protected void handleInput(GameContainer container){
+	protected void handleInput(GameContainer container){
 		Input input = container.getInput();
 		
 		if(input.isKeyDown(Input.KEY_LEFT)){
