@@ -1,6 +1,10 @@
 package jesper.edwin; 
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
 import org.newdawn.slick.*; 
 
 
@@ -35,10 +39,9 @@ public class PlattformMP extends BasicGame {
 		if(!PlattformMP.PAUSE){
 			handleInput(container);
 			
-			for(GameObject o : GameObject.list){
-				o.update();
+			for(int i = 0; i < GameObject.list.size(); i++){
+				GameObject.list.get(i).update();
 			}
-			
 			
 		}
 		else pauseUpdate();

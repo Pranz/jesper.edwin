@@ -18,9 +18,7 @@ public abstract class GameObject {
 	}
 	
 	public void destroy(){
-
 		list.remove(this);
-
 	}
 	
 	public void callAlarm(int number, Alarm alarm){

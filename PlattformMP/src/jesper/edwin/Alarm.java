@@ -34,7 +34,7 @@ public class Alarm extends GameObject {
 		super.destroy();
 	}
 	
-	protected void loop(){
+	public void loop(){
 		new Alarm(number, ticks, host);
 	}
 

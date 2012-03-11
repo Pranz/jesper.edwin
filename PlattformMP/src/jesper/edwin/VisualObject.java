@@ -29,7 +29,7 @@ public class VisualObject extends GameObject {
 	@Override public void callAlarm(int number, Alarm alarm){
 		if(number == 0){
 			System.out.println("Success");
-			alarm.loop();
+			//alarm.loop();
 		}
 	}
 	
