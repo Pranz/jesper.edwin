@@ -10,9 +10,6 @@ public class PlattformMP extends BasicGame {
 	
 	static boolean PAUSE = false;
 	
-	private final int FPS = 100;
-	private final int WINDOW_LENGTH = 640;
-	private final int WINDOW_HEIGHT = 480;
 	private final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
 	
@@ -28,20 +25,12 @@ public class PlattformMP extends BasicGame {
 	@Override public void init(GameContainer container) throws SlickException {
 		
 		player = new VisualObject(new Image(IMAGE_DIR + "player.png"), 140, 70);
-		container.setTargetFrameRate(FPS);
+		container.setTargetFrameRate(100);
 	} 
 	
 	@Override public void update(GameContainer container, int delta) throws SlickException {
 		if(!PlattformMP.PAUSE){
 			handleInput(container);
-			
-			for(GameObject o : GameObject.list){
-				o.update();
-			}
-			
-			for(GameObject o : GameObject.removeList){
-				GameObject.list.remove(o);
-			}
 		}
 		else pauseUpdate();
 	} 
@@ -61,7 +50,17 @@ public class PlattformMP extends BasicGame {
 		g.drawString("VisualObject: " + VisualObject.list.size(), 0, 120); 
 		//tog bort all onödig skit för tillfället
 		
-		if(Console.isOn) drawConsole(g);
+		
+		if(Console.isOn){
+			g.setColor(Color.darkGray);
+			g.fillRect(0,480-20,640,480);
+			String[] consoleOut=Console.output.split(Character.toString((char)10));
+			for(int i=0;i<consoleOut.length;i++)
+				g.drawString(consoleOut[i], 6, 480-20-((consoleOut.length-i)*20));
+			g.setColor(Color.white);
+			g.drawString("> " + Console.input, 6, 480-20);
+			g.drawLine(26+Console.input.length()*9, 480-20+2, 26+Console.input.length()*9, 480-2);
+			}
 	} 
 	
 	
@@ -75,7 +74,7 @@ public class PlattformMP extends BasicGame {
 		} 
 	
 	/*
-	protected void handleInput(GameContainer container){
+	 * protected void handleInput(GameContainer container){
 		Input input = container.getInput();
 		
 		if(input.isKeyDown(Input.KEY_LEFT)){
@@ -98,17 +97,6 @@ public class PlattformMP extends BasicGame {
 	
 	private void handleInput(GameContainer gc) throws SlickException {
 		gc.getInput().addKeyListener(keyboard);
-	}
-	
-	private void drawConsole(Graphics g){
-		g.setColor(Color.darkGray);
-		g.fillRect(0,480-20,640,480);
-		String[] consoleOut = Console.output.split(Character.toString((char)10));
-		for(int i=0;i<consoleOut.length;i++)
-			g.drawString(consoleOut[i], 6, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20));
-		g.setColor(Color.white);
-		g.drawString("> " + Console.input, 6, 480-20);
-		g.drawLine(26+Console.input.length()*9, WINDOW_HEIGHT-20+2, 26+Console.input.length()*9, WINDOW_HEIGHT-2);
 	}
 	
 }

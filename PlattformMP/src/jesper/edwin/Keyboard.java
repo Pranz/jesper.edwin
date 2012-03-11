@@ -4,7 +4,7 @@ package jesper.edwin;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 
-public class Keyboard extends GameObject implements KeyListener {
+public class Keyboard implements KeyListener {
 	
 	public Keyboard(){
 		
@@ -12,21 +12,25 @@ public class Keyboard extends GameObject implements KeyListener {
 
 	@Override
 	public void inputEnded() {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void inputStarted() {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public boolean isAcceptingInput() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public void setInput(Input input) {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -57,6 +61,7 @@ public class Keyboard extends GameObject implements KeyListener {
 	
 	@Override
 	public void keyReleased(int key, char c) {
+		// TODO Auto-generated method stub
 
 	}
 
