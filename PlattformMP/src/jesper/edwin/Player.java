@@ -11,13 +11,9 @@ public class Player extends Entity {
 	int playerID;
 	
 	//all dem keys
-	int jumpKey;
-	int actionKey;
-	int leftKey;
-	int rightKey;
-	int upKey;
-	int downKey;
-	
+	public enum Key{
+		jumpKey, actionKey, upKey, downKey, leftKey, rightKey
+	}
 	static List<Player> list = new ArrayList<Player>();
 
 	
@@ -28,7 +24,7 @@ public class Player extends Entity {
 	}
 	
 	protected void defineKeys(){
-		// TODO fill key[actionkey, eg JUMP_BUTTON] with values got from a config file. It should be based on the player ID, 
+		// TODO fill key[eg jumpKey] with values got from a config file. It should be based on the player ID, 
 		// i.e PlayerID 1 gets player1.config
 	}
 	
