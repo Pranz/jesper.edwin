@@ -12,7 +12,7 @@ public class Player extends Entity {
 	
 	//all dem keys
 	public enum Key{
-		jumpKey, actionKey, upKey, downKey, leftKey, rightKey
+		jump, action, up, down, left, right
 	}
 	static List<Player> list = new ArrayList<Player>();
 
