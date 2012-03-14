@@ -9,18 +9,16 @@ public class VisualObject extends GameObject {
 	Image image;
 	double x;
 	double y;
-	int alarmNumber = super.alarmNumber+1;
+	int alarmNumber = super.alarmNumber;
 	
 	static List<VisualObject> list = new ArrayList<VisualObject>();
 	
-	public VisualObject(Image image, double x, double y){
+	public VisualObject(double x, double y, Image image){
 		super();
 		list.add(this);
 		this.image = image;
-		this.x = x;
-		this.y = y;
-		new Alarm(super.alarmNumber, 200, this);
-		new Alarm(super.alarmNumber + 1, 200, this);
+		//this.x = x;
+		//this.y = y;
 	}
 	
 	public void move(int x, int y){
@@ -28,20 +26,13 @@ public class VisualObject extends GameObject {
 		this.y += y;
 	}
 	
-	@Override public void callAlarm(int number, Alarm alarm){
-		super.callAlarm(number, alarm);
-		if(number - super.alarmNumber == 0){
-			System.out.println("Success");
-			//alarm.loop();
-		}
-		if(number - super.alarmNumber == 1){
-			System.out.println("Testing shit yo");
-		}
-	}
-	
 	@Override public void destroy(){
 		super.destroy();
 		list.remove(this);
+	}
+	
+	@Override public void update(){
+		super.update();
 	}
 	
 

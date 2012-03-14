@@ -36,7 +36,7 @@ public class Console {
 		if(outputLines<outputMaxLines)
 			outputLines++;
 		else
-			output=output.substring(output.indexOf((char)10)+1);
+			output = output.substring(output.indexOf((char)NEWLINE)+1);
 		
 		output += str + ((char)NEWLINE);
 	}

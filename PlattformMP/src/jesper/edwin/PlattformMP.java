@@ -11,7 +11,6 @@ import org.newdawn.slick.*;
 public class PlattformMP extends BasicGame { 
 	
 	VisualObject player;
-	
 	static boolean PAUSE = false;
 	
 	private final int FPS = 60;
@@ -31,7 +30,7 @@ public class PlattformMP extends BasicGame {
 	
 	@Override public void init(GameContainer container) throws SlickException {
 		
-		player = new VisualObject(new Image(IMAGE_DIR + "player.png"), 140, 70);
+		player = new Entity(140, 70, new Image(IMAGE_DIR + "player.png"));
 		container.setTargetFrameRate(FPS);
 	} 
 	
@@ -105,7 +104,7 @@ public class PlattformMP extends BasicGame {
 		g.setColor(Color.darkGray);
 		g.fillRect(0,WINDOW_HEIGHT-20,WINDOW_WIDTH,WINDOW_HEIGHT);
 		String[] consoleOut = Console.output.split(Character.toString((char)10));
-		for(int i=0;i<consoleOut.length;i++)
+		for(int i = 0; i < consoleOut.length; i++)
 			g.drawString(consoleOut[i], 6, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20));
 		g.setColor(Color.white);
 		g.drawString("> " + Console.input, 6, WINDOW_HEIGHT-20);
