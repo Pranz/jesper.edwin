@@ -17,8 +17,8 @@ public class VisualObject extends GameObject {
 		super();
 		list.add(this);
 		this.image = image;
-		//this.x = x;
-		//this.y = y;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public void move(int x, int y){

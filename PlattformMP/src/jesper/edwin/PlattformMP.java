@@ -22,6 +22,7 @@ public class PlattformMP extends BasicGame {
 	Console console = new Console();
 	
 	Keyboard keyboard = new Keyboard();
+	static GameContainer globalContainer;
 
 	
 	public PlattformMP() { 
@@ -30,11 +31,16 @@ public class PlattformMP extends BasicGame {
 	
 	@Override public void init(GameContainer container) throws SlickException {
 		
-		player = new Entity(140, 70, new Image(IMAGE_DIR + "player.png"));
+		player = new Player(140, 70, new Image(IMAGE_DIR + "player.png"), 0);
 		container.setTargetFrameRate(FPS);
+		globalContainer = container;
+		
 	} 
 	
 	@Override public void update(GameContainer container, int delta) throws SlickException {
+		globalContainer = container;
+		
+		
 		if(!PlattformMP.PAUSE){
 			handleInput(container);
 			

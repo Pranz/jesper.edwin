@@ -14,11 +14,13 @@ public class Entity extends VisualObject {
 	
 	public Entity(int x, int y, Image image){
 		super(x, y, image);
+		list.add(this);
 		organic = false;
 	}
 	
 	public Entity(int x, int y, Image image, boolean organ){
 		super(x, y, image);
+		list.add(this);
 		organic = organ;
 	}
 	
@@ -28,6 +30,7 @@ public class Entity extends VisualObject {
 	
 	@Override public void destroy(){
 		super.destroy();
+		list.remove(this);
 	}
 
 }
