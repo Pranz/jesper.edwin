@@ -1,10 +1,6 @@
 package jesper.edwin; 
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
-
 import org.newdawn.slick.*; 
 
 
@@ -14,8 +10,8 @@ public class PlattformMP extends BasicGame {
 	static boolean PAUSE = false;
 	
 	private final int FPS = 60;
-	private final int WINDOW_WIDTH = 640;
-	private final int WINDOW_HEIGHT = 480;
+	private static final int WINDOW_WIDTH = 640;
+	private static final int WINDOW_HEIGHT = 480;
 	private final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
 	
@@ -74,6 +70,7 @@ public class PlattformMP extends BasicGame {
 	public static void main(String[] args) { 
 		try { 
 			AppGameContainer app = new AppGameContainer(new PlattformMP()); 
+			app.setDisplayMode(WINDOW_WIDTH, WINDOW_HEIGHT, false);
 			app.start();
 			} 
 		catch (SlickException e) { 
