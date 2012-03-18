@@ -19,11 +19,12 @@ public class VisualObject extends GameObject {
 		this.image = image;
 		this.x = x;
 		this.y = y;
+		new Alarm(super.alarmNumber+1, 120, this);
 	}
 	
-	public void move(int x, int y){
-		this.x += x;
-		this.y += y;
+	public void move(double xspeed, double yspeed){
+		this.x += xspeed;
+		this.y += yspeed;
 	}
 	
 	@Override public void destroy(){
@@ -33,6 +34,10 @@ public class VisualObject extends GameObject {
 	
 	@Override public void update(){
 		super.update();
+	}
+	
+	public void callAlarm(int number, Alarm alarm){
+		//if(number == super.alarmNumber+1)System.out.println("Ypy");
 	}
 	
 

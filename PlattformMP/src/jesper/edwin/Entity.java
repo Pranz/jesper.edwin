@@ -8,7 +8,13 @@ public class Entity extends VisualObject {
 	
 	Image image;
 	boolean organic;
-	
+	double gravity = 0.2;
+	double hspeed = 5;
+	double vspeed = 0;
+	double speed = 0.3;
+	double friction = 0.2;
+	double maxSpeed = 5;
+	double maxFallSpeed = 5;
 	
 	static List<Entity> list = new ArrayList<Entity>();
 	
@@ -26,11 +32,18 @@ public class Entity extends VisualObject {
 	
 	@Override public void update(){
 		super.update();
+		move(hspeed, vspeed);
+		hspeed = increaseNumberTo(hspeed, friction, 0);
 	}
 	
 	@Override public void destroy(){
 		super.destroy();
 		list.remove(this);
+	}
+	
+	public void walk(double direction){
+		//direction is either 1 for right, -1 for left
+		hspeed += speed*direction;
 	}
 
 }

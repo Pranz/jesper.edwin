@@ -33,11 +33,12 @@ public class Alarm extends GameObject {
 		}
 		counter++;
 		
+		
 	}
 	
 	@Override public void destroy(){
-		list.remove(this);
 		super.destroy();
+		list.remove(this);
 	}
 	
 	public void loop(){

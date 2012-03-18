@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.newdawn.slick.*;
 
-public class Player extends Entity {
+public class Player extends GameObject {
 	
 	int[] key;
 	int playerID;
+	Entity ent;
 	
 	//all dem keys
 	public enum Key{
@@ -17,8 +18,9 @@ public class Player extends Entity {
 	static List<Player> list = new ArrayList<Player>();
 
 	
-	public Player(int x, int y, Image image, int playerID){
-		super(x, y, image);
+	public Player(Entity ent, int playerID){
+		super();
+		this.ent = ent;
 		list.add(this);
 		defineKeys();
 	}
@@ -31,12 +33,12 @@ public class Player extends Entity {
 	@Override public void update(){
 		super.update();
 		handleInput(PlattformMP.globalContainer);
+
 	}
 	
 	@Override public void destroy(){
 		super.destroy();
 		list.remove(this);
-		handleInput(PlattformMP.globalContainer);
 	}
 	
 	
@@ -44,19 +46,19 @@ public class Player extends Entity {
 		Input input = container.getInput();
 		
 		if(input.isKeyDown(Input.KEY_LEFT)){
-			move(-2, 0);
+			ent.walk(LEFT);
 		}
 		
 		if(input.isKeyDown(Input.KEY_RIGHT)){
-			move(2, 0);
+			ent.walk(RIGHT);
 		}
 		
 		if(input.isKeyDown(Input.KEY_DOWN)){
-			move(0, 2);
+			
 		}
 		
 		if(input.isKeyDown(Input.KEY_UP)){
-			move(0, -2);
+			
 		}
 	}
 	
