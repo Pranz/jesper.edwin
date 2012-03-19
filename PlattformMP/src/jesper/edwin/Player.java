@@ -31,8 +31,9 @@ public class Player extends GameObject {
 	}
 	
 	@Override public void update(){
-		super.update();
 		handleInput(PlattformMP.globalContainer);
+		super.update();
+
 
 	}
 	

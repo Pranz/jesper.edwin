@@ -32,18 +32,20 @@ public abstract class GameObject {
 		}
 	}
 	
-	public double increaseNumberTo(double a, double speed, double target){
+	public double increaseNumberTo(double oldValue, double speed, double target){
 		/*
 		 * move a to c with a speed of b
-		 * @param a The variable you want to move. Often used as var = increaseNumberTo(var, 0.2, 0);
+		 * @param oldValue The variable you want to move. Often used as var = increaseNumberTo(var, 0.2, 0);
 		 * @param speed The speed you want to move a with.
 		 * @param target The target you want to move closer to. 
 		 * 
 		 */
-		if(Math.abs(a) <= speed)return 0;
+		
+		if(oldValue != 0 && Math.abs(oldValue - target*sign(oldValue)) <= speed)return target*sign(oldValue);
+		//if (false) return 0;
 		else{
-			a -=     target;
-			return((Math.abs(a)-speed) * sign(a) + target);
+			oldValue -= target;
+			return((Math.abs(oldValue)-speed) * sign(oldValue) + target);
 		}
 	}
 	

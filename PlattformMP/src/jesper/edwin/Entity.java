@@ -43,7 +43,7 @@ public class Entity extends VisualObject {
 	
 	public void walk(double direction){
 		//direction is either 1 for right, -1 for left
-		hspeed += speed*direction;
+		hspeed = increaseNumberTo(hspeed, speed, maxSpeed*direction);
 	}
 
 }
