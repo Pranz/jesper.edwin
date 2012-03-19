@@ -41,7 +41,7 @@ public abstract class GameObject {
 		 * 
 		 */
 		
-		if(oldValue != 0 && Math.abs(oldValue - target*sign(oldValue)) <= speed)return target*sign(oldValue);
+		if(Math.abs(oldValue - target) <= speed)return target;
 		//if (false) return 0;
 		else{
 			oldValue -= target;
@@ -63,5 +63,21 @@ public abstract class GameObject {
         return 0;
         }
     }
+	
+	public static final int signum(double diff){
+	    if ( diff > 0 )
+	        {
+	        return 1;
+	        }
+	    if ( diff < 0 )
+	        {
+	        return -1;
+	        }
+	    else
+	        {
+	        return 1;
+	        }
+	    }
+
 
 }
