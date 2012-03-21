@@ -15,20 +15,18 @@ public class Alarm extends GameObject {
 	
 	int counter = 0;
 	int ticks;
-	int number;
 	GameObject host;
 	
-	public Alarm(int number, int ticks, GameObject host){
+	public Alarm(int ticks, GameObject host){
 		super();
 		list.add(this);
 		this.ticks = ticks;
-		this.number = number;
 		this.host = host;
 	}
 	
 	@Override public void update(){
 		if(counter >= ticks){
-			host.callAlarm(number, this);
+			host.callAlarm(this);
 			destroy();
 		}
 		counter++;
@@ -41,8 +39,8 @@ public class Alarm extends GameObject {
 		list.remove(this);
 	}
 	
-	public void loop(){
-		new Alarm(number, ticks, host);
+	public Alarm loop(){
+		return new Alarm(ticks, host);
 	}
 
 }

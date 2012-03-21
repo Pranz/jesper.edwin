@@ -6,11 +6,12 @@ import java.lang.Math;
 
 public abstract class GameObject {
 	
-	public int alarmNumber = 0;
+
 	static List<GameObject> list = new ArrayList<GameObject>();
 	static final int RIGHT = 1;
 	static final int LEFT = -1;
 	boolean cuedForRemoval = false;
+	Alarm superTest;
 	
 	public GameObject(){
 		list.add(this);
@@ -25,11 +26,8 @@ public abstract class GameObject {
 		list.remove(this);
 	}
 	
-	public void callAlarm(int number, Alarm alarm){
-		if(number == 0){
-			System.out.println("Testing");
-			//alarm.loop();
-		}
+	public void callAlarm(Alarm alarm){
+		if(alarm == superTest)System.out.println("YESYESYES");
 	}
 	
 	public double increaseNumberTo(double oldValue, double speed, double target){
@@ -65,6 +63,7 @@ public abstract class GameObject {
     }
 	
 	public static final int signum(double diff){
+		//is used when you want to return 1 although the diff is 0. Yeah, ska skriva om den sen.
 	    if ( diff > 0 )
 	        {
 	        return 1;

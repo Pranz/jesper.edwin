@@ -16,6 +16,7 @@ public class Entity extends VisualObject {
 	double maxSpeed = 5;
 	double maxFallSpeed = 5;
 	
+	
 	static List<Entity> list = new ArrayList<Entity>();
 	
 	public Entity(int x, int y, Image image){
@@ -39,6 +40,10 @@ public class Entity extends VisualObject {
 	@Override public void destroy(){
 		super.destroy();
 		list.remove(this);
+	}
+	
+	@Override public void callAlarm(Alarm alarm){
+		super.callAlarm(alarm);
 	}
 	
 	public void walk(double direction){

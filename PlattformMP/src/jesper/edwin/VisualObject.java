@@ -9,7 +9,8 @@ public class VisualObject extends GameObject {
 	Image image;
 	double x;
 	double y;
-	int alarmNumber = super.alarmNumber;
+	Alarm testAlarm;
+	Alarm secondAlarm;
 	
 	static List<VisualObject> list = new ArrayList<VisualObject>();
 	
@@ -19,7 +20,9 @@ public class VisualObject extends GameObject {
 		this.image = image;
 		this.x = x;
 		this.y = y;
-		new Alarm(super.alarmNumber+1, 120, this);
+		testAlarm = new Alarm(120, this);
+		secondAlarm = new Alarm(200, this);
+		
 	}
 	
 	public void move(double xspeed, double yspeed){
@@ -36,8 +39,15 @@ public class VisualObject extends GameObject {
 		super.update();
 	}
 	
-	public void callAlarm(int number, Alarm alarm){
-		//if(number == super.alarmNumber+1)System.out.println("Ypy");
+	public void callAlarm(Alarm alarm){
+		/*
+		 * Examples for alarms, I'll leave them here
+		if(alarm == testAlarm){
+			System.out.println("Ypy");
+			testAlarm = alarm.loop();
+		}
+		if(alarm == secondAlarm)System.out.println("Yoyoyo");
+		*/
 	}
 	
 
