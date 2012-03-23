@@ -1,7 +1,5 @@
 package jesper.edwin;
 
-
-
 public class Console {
 	
 	public static boolean isOn = false;

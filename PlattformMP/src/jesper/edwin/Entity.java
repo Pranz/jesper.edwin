@@ -1,10 +1,11 @@
 package jesper.edwin;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.*;
 
-public class Entity extends VisualObject {
+public class Entity extends InteractiveObject {
 	
 	Image image;
 	boolean organic;
@@ -15,7 +16,7 @@ public class Entity extends VisualObject {
 	double friction = 0.2;
 	double maxSpeed = 5;
 	double maxFallSpeed = 5;
-	
+	boolean solid = true;
 	
 	static List<Entity> list = new ArrayList<Entity>();
 	

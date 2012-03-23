@@ -31,7 +31,9 @@ public class PlattformMP extends BasicGame {
 	
 	@Override public void init(GameContainer container) throws SlickException {
 		
-		player = new Player(new Entity(140, 70, new Image(IMAGE_DIR + "player.png")), 0);
+		player = new Player(new Entity(200, 70, new Image(IMAGE_DIR + "player.png")), 0);
+		new Solid(130, 70, new Image(IMAGE_DIR + "whiteblock.png"));
+		new Solid(500, 80, new Image(IMAGE_DIR + "whiteblock.png"));
 		container.setTargetFrameRate(FPS);
 		globalContainer = container;
 		container.setShowFPS(false);

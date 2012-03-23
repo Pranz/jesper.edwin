@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.newdawn.slick.*;
 
+
 public class VisualObject extends GameObject {
 	
 	Image image;
 	double x;
 	double y;
-	Alarm testAlarm;
-	Alarm secondAlarm;
+
 	
 	static List<VisualObject> list = new ArrayList<VisualObject>();
 	
@@ -22,7 +22,6 @@ public class VisualObject extends GameObject {
 		this.y = y;
 		testAlarm = new Alarm(120, this);
 		secondAlarm = new Alarm(200, this);
-		
 	}
 	
 	public void move(double xspeed, double yspeed){
@@ -39,9 +38,12 @@ public class VisualObject extends GameObject {
 		super.update();
 	}
 	
+	Alarm testAlarm;
+	Alarm secondAlarm;
 	public void callAlarm(Alarm alarm){
 		/*
 		 * Examples for alarms, I'll leave them here
+		 * 
 		if(alarm == testAlarm){
 			System.out.println("Ypy");
 			testAlarm = alarm.loop();
