@@ -51,5 +51,23 @@ public class Entity extends InteractiveObject {
 		//direction is either 1 for right, -1 for left
 		hspeed = increaseNumberTo(hspeed, speed, maxSpeed*direction);
 	}
+	
+	public void move(double xspeed, double yspeed){
+		if(!placeMeeting(x + xspeed, this.y, InteractiveObject.list)){
+			this.x += xspeed;
+			this.y += yspeed;
+		}
+		else nullSpeed();
+	}
+	
+	public void nullSpeed(){
+		hspeed = 0;
+		vspeed = 0;
+	}
+	
+	public void setSpeed(double newHspeed, double newVspeed){
+		hspeed = newHspeed;
+		vspeed = newVspeed;
+	}
 
 }

@@ -13,23 +13,23 @@ public class Alarm extends GameObject {
 	
 	static List<Alarm> list = new ArrayList<Alarm>();
 	
-	int counter = 0;
-	int ticks;
+	int ticks = 0;
+	int maxTicks;
 	GameObject host;
 	
-	public Alarm(int ticks, GameObject host){
+	public Alarm(int maxTicks, GameObject host){
 		super();
 		list.add(this);
-		this.ticks = ticks;
+		this.maxTicks = maxTicks;
 		this.host = host;
 	}
 	
 	@Override public void update(){
-		if(counter >= ticks){
+		if(ticks >= maxTicks){
 			host.callAlarm(this);
 			destroy();
 		}
-		counter++;
+		ticks++;
 		
 		
 	}
@@ -40,7 +40,7 @@ public class Alarm extends GameObject {
 	}
 	
 	public Alarm loop(){
-		return new Alarm(ticks, host);
+		return new Alarm(maxTicks, host);
 	}
 
 }
