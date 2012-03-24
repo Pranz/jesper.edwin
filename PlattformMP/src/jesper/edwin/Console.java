@@ -1,13 +1,13 @@
 package jesper.edwin;
 
-public class Console {
+public class Console extends GameObject {
 	
-	public static boolean isOn = false;
-	public static String input = "";
-	public static String output = "";
-	private static int outputLines = 0;
-	private static int outputMaxLines = 6;
-	private final static int NEWLINE = 10;
+	public boolean isOn = false;
+	public String input = "";
+	public String output = "";
+	private int outputLines = 0;
+	private int outputMaxLines = 6;
+	private final int NEWLINE = 10;
 	
 	public enum Command{
 		test, shit
@@ -17,20 +17,20 @@ public class Console {
 
 	}
 	
-	public static void enterConsole(){
+	public void enterConsole(){
 		isOn = true;
 		PlattformMP.PAUSE = true;
 		
 	}
 	
-	public static void closeConsole(boolean sendInfo){
+	public void closeConsole(boolean sendInfo){
 		if(sendInfo) executeCommand(input);
 		input = "";
 		isOn = false;
 		PlattformMP.PAUSE = false;
 	}
 	
-	public static void outputConsole(String str){
+	public void outputConsole(String str){
 		if(outputLines<outputMaxLines)
 			outputLines++;
 		else
@@ -39,7 +39,7 @@ public class Console {
 		output += str + ((char)NEWLINE);
 	}
 	
-	public static void executeCommand(String str){
+	public void executeCommand(String str){
 		if(str!=""){
 			outputConsole("> "+str);
 			String[] command = str.split(" ");
@@ -62,7 +62,7 @@ public class Console {
 	}
 	
 	
-	public static boolean stringEqualsCommand(String str){
+	public boolean stringEqualsCommand(String str){
 		for (Command me : Command.values()) {
 			if (me.name().equalsIgnoreCase(str))
 				return true;

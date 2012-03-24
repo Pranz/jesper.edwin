@@ -33,10 +33,10 @@ public class Keyboard implements KeyListener {
 	@Override
 	public void keyPressed(int key, char c) {
 		
-		if(Console.isOn){
-			if((key == Input.KEY_SPACE) || (c >= ' '))Console.input += c;
-			if(key == Input.KEY_BACK && Console.input.length() > 0){
-				Console.input = Console.input.substring(0, Console.input.length()-1);
+		if(PlattformMP.console.isOn){
+			if((key == Input.KEY_SPACE) || (c >= ' '))PlattformMP.console.input += c;
+			if(key == Input.KEY_BACK && PlattformMP.console.input.length() > 0){
+				PlattformMP.console.input = PlattformMP.console.input.substring(0, PlattformMP.console.input.length()-1);
 			}
 		}
 		else{
@@ -46,8 +46,8 @@ public class Keyboard implements KeyListener {
 			if( c == 'p') PlattformMP.PAUSE = !PlattformMP.PAUSE;
 		}
 		if(key == Input.KEY_ENTER){
-			if(!Console.isOn) Console.enterConsole();
-			else Console.closeConsole(true);
+			if(!PlattformMP.console.isOn) PlattformMP.console.enterConsole();
+			else PlattformMP.console.closeConsole(true);
 		}
 		
 		

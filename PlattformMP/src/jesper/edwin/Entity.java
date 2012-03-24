@@ -10,7 +10,7 @@ public class Entity extends InteractiveObject {
 	Image image;
 	boolean organic;
 	double gravity = 0.2;
-	double hspeed = 5;
+	double hspeed = 4;
 	double vspeed = 0;
 	double speed = 0.3;
 	double friction = 0.2;
