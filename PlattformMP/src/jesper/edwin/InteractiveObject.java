@@ -21,6 +21,7 @@ public abstract class InteractiveObject extends VisualObject {
 	public InteractiveObject(double x, double y, Image image) {
 		super(x, y, image);
 		list.add(this);
+		hitbox = new Rectangle((float)x, (float)y, (float)image.getWidth(), (float)image.getHeight());
 
 		
 
