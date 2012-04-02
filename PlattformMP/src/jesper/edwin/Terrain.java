@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.*;
 
 public class Terrain extends InteractiveObject {
 	

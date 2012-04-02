@@ -25,11 +25,11 @@ public class Alarm extends GameObject {
 	}
 	
 	@Override public void update(){
-		if(ticks >= maxTicks){
+		if(ticks == maxTicks){
 			host.callAlarm(this);
 			destroy();
 		}
-		ticks++;
+		if(ticks <= maxTicks) ticks++;
 		
 		
 	}

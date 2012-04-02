@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.*;
 
 public class Entity extends InteractiveObject {
 	
 	Image image;
 	boolean organic;
-	double gravity = 0.2;
+	double gravity = 0.42;
 	double hspeed = 4;
 	double vspeed = 0;
-	double speed = 0.3;
-	double friction = 0.2;
-	double maxSpeed = 5;
+	double speed = 0.5;
+	double friction = 0.3;
+	double maxSpeed = 3;
 	double maxFallSpeed = 5;
 	boolean solid = true;
+	double jumpStrength = 8;
 	
 	static List<Entity> list = new ArrayList<Entity>();
 	
@@ -36,6 +38,7 @@ public class Entity extends InteractiveObject {
 		super.update();
 		move(hspeed, vspeed);
 		hspeed = increaseNumberTo(hspeed, friction, 0);
+		vspeed += gravity;
 	}
 	
 	@Override public void destroy(){
@@ -52,12 +55,21 @@ public class Entity extends InteractiveObject {
 		hspeed = increaseNumberTo(hspeed, speed, maxSpeed*direction);
 	}
 	
-	public void move(double xspeed, double yspeed){
-		if(!placeMeeting(x + xspeed, this.y, InteractiveObject.list)){
+	@Override public void move(double xspeed, double yspeed){
+		if(!placeMeeting(x + xspeed, y, InteractiveObject.list)){
 			this.x += xspeed;
+		}
+		else hspeed = 0;
+		
+		if(!placeMeeting(x, y + yspeed, InteractiveObject.list)){
 			this.y += yspeed;
 		}
-		else nullSpeed();
+		else vspeed = 0;
+
+	}
+	
+	public void mainAttack(){
+		
 	}
 	
 	public void nullSpeed(){

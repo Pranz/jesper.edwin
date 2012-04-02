@@ -4,24 +4,26 @@ import java.util.List;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.*;
 
 /*
  * Any interactive object. Has collision
  * and is checked every update.
  */
 
-public class InteractiveObject extends VisualObject {
+public abstract class InteractiveObject extends VisualObject {
 	
 	boolean solid = false;
 	
-	Rectangle hitbox;
+	Shape hitbox;
 	static List<InteractiveObject> list = new ArrayList<InteractiveObject>();
 
 	public InteractiveObject(double x, double y, Image image) {
 		super(x, y, image);
-		hitbox = new Rectangle((float)x, (float)y, (float)image.getWidth(), (float)image.getHeight());
 		list.add(this);
+
+		
+
 	}
 	
 	@Override public void update(){
@@ -34,11 +36,11 @@ public class InteractiveObject extends VisualObject {
 		list.remove(this);
 	}
 	
-	public boolean collidesWithObject(InteractiveObject object, Rectangle hitbox){
+	public boolean collidesWithObject(InteractiveObject object, Shape hitbox){
 		return(hitbox.intersects(object.hitbox));
 	}
 	
-	public boolean collidesWithObject(List<InteractiveObject> objectList, Rectangle hitbox){
+	public boolean collidesWithObject(List<? extends InteractiveObject> objectList, Shape hitbox){
 		if(objectList.contains(this))objectList.remove(this);
 		
 		for(InteractiveObject object : objectList){
@@ -56,9 +58,20 @@ public class InteractiveObject extends VisualObject {
 
 	}
 	
-	public boolean placeMeeting(double x, double y, List<InteractiveObject> objectList){
+	public boolean placeMeeting(double x, double y, List<? extends InteractiveObject> objectList){
 		return collidesWithObject(objectList, new Rectangle((float)x, (float)y,  hitbox.getWidth(), hitbox.getHeight()));
 	}
 	
+	public List<? extends InteractiveObject> getCollidedObjects(List<? extends InteractiveObject> typeList){
+		
+		List<InteractiveObject> l = new ArrayList<InteractiveObject>();
+		if(typeList.contains(this))typeList.remove(this);
+		
+		for(InteractiveObject object : typeList){
+			if(hitbox.intersects(object.hitbox))l.add(object);
+		}
+		
+		return l;
+	}
 
 }
