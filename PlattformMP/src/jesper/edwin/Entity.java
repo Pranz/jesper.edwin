@@ -11,7 +11,7 @@ public class Entity extends InteractiveObject {
 	Image image;
 	boolean organic;
 	double gravity = 0.42;
-	double hspeed = 4;
+	double hspeed = 0;
 	double vspeed = 0;
 	double speed = 0.5;
 	double friction = 0.3;
@@ -65,9 +65,9 @@ public class Entity extends InteractiveObject {
 		}
 		else vspeed = 0;*/
 		
-		//TODO Pixel-perfect move är bara i int än så länge, inga decimaler, fixar sen
-		int _x=GameObject.signum(xspeed);
-		for(int i=0;i<Math.abs(xspeed);i++){
+		//TODO Pixel-perfect move fixat med decimaler tror jag, kolla ifall det stämmer. Speed jiggling när man kolliderar igen
+		int _x=GameObject.signum(xspeed),i=0;
+		for(i=0;i<Math.abs(Math.floor(xspeed));i++){
 			if(!placeMeeting(x+_x,y,InteractiveObject.list))
 				this.x+=_x;
 			else{
@@ -75,15 +75,25 @@ public class Entity extends InteractiveObject {
 				break;
 			}
 		}
+		if(i>=Math.abs(Math.floor(xspeed))){
+			double xdecimals=(Math.abs(xspeed)-Math.abs(Math.floor(xspeed)))*_x;
+			if(!placeMeeting(x+xdecimals,y,InteractiveObject.list))
+				this.x+=xdecimals;
+		}
 		
 		int _y=GameObject.signum(yspeed);
-		for(int i=0;i<Math.abs(yspeed);i++){
+		for(i=0;i<Math.abs(yspeed);i++){
 			if(!placeMeeting(x,y+_y,InteractiveObject.list))
 				this.y+=_y;
 			else{
 				vspeed=0;
 				break;
 			}
+		}
+		if(i>=Math.abs(Math.floor(yspeed))){
+			double ydecimals=(Math.abs(yspeed)-Math.abs(Math.floor(yspeed)))*_y;
+			if(!placeMeeting(x,y+ydecimals,InteractiveObject.list))
+				this.y+=ydecimals;
 		}
 	}
 	
