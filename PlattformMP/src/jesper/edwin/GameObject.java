@@ -27,7 +27,7 @@ public abstract class GameObject {
 	}
 	
 	public void callAlarm(Alarm alarm){
-		if(alarm == superTest)System.out.println("YESYESYES");
+		if(alarm == superTest){System.out.println("YESYESYES");}
 	}
 	
 	public double increaseNumberTo(double oldValue, double speed, double target){

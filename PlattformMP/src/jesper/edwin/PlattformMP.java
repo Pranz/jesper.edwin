@@ -79,12 +79,14 @@ public class PlattformMP extends BasicGame {
 		l.add("VisualObject: " + VisualObject.list.size());
 		l.add("hspeed: " + (double)Math.round(player.ent.hspeed*10)/10);
 		l.add("vspeed: " + (double)Math.round(player.ent.vspeed*10)/10);
-		l.add("x: " + Math.round(player.ent.x));
-		l.add("y: " + Math.round(player.ent.y));
+		l.add("x: " + player.ent.x);
+		l.add("y: " + player.ent.y);
+		l.add("Console Timer: "+console.consoleTimer.ticks+" / "+console.consoleTimer.maxTicks);
+		//TODO Om man kollar på console timer variabeln i startup så ser man att den springer till 100 och gör reset, varför?
 		
 		drawList(g,l);
 		
-		if(console.isOn) drawconsole(g);
+		drawconsole(g);
 	} 
 	
 	
@@ -126,14 +128,28 @@ public class PlattformMP extends BasicGame {
 	}
 	
 	private void drawconsole(Graphics g){
-		g.setColor(Color.darkGray);
-		g.fillRect(0,WINDOW_HEIGHT-20,WINDOW_WIDTH,WINDOW_HEIGHT);
-		String[] consoleOut = console.output.split(Character.toString((char)10));
-		for(int i = 0; i < consoleOut.length; i++)
-			g.drawString(consoleOut[i], 6, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20));
-		g.setColor(Color.white);
-		g.drawString("> " + console.input, 6, WINDOW_HEIGHT-20);
-		g.drawLine(26+console.input.length()*9, WINDOW_HEIGHT-20+2, 26+console.input.length()*9, WINDOW_HEIGHT-2);
+		if(console.isOn||console.consoleTimer.ticks<console.consoleTimer.maxTicks){
+			int alpha=255;
+			if(console.consoleTimer.ticks<console.consoleTimer.maxTicks)
+				alpha=255-((int)(((float)console.consoleTimer.ticks/console.consoleTimer.maxTicks)*255));
+			//TODO Göra till List istället för array
+			String[] consoleOut = console.output.split(Character.toString((char)10));
+			for(int i = 0; i < consoleOut.length; i++){
+				g.setColor(new Color(0,0,0,alpha));
+				g.drawString(consoleOut[i], 6+2, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20)+2);
+				g.drawString(consoleOut[i], 6-2, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20)-2);
+				g.setColor(new Color(255,255,255,alpha));
+				g.drawString(consoleOut[i], 6, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20));
+				g.setColor(Color.white);
+			}
+		}
+		if(console.isOn){
+			g.setColor(Color.darkGray);
+			g.fillRect(0,WINDOW_HEIGHT-20,WINDOW_WIDTH,WINDOW_HEIGHT);
+			g.setColor(Color.white);
+			g.drawString("> " + console.input, 6, WINDOW_HEIGHT-20);
+			g.drawLine(26+console.input.length()*9, WINDOW_HEIGHT-20+2, 26+console.input.length()*9, WINDOW_HEIGHT-2);
+		}
 	}
 	
 	public void drawList(Graphics g, List<String> list){

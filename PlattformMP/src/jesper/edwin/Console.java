@@ -8,6 +8,7 @@ public class Console extends GameObject {
 	private int outputLines = 0;
 	private int outputMaxLines = 6;
 	private final int NEWLINE = 10;
+	Alarm consoleTimer=new Alarm(240,this);
 	
 	public enum Command{
 		test, shit
@@ -37,13 +38,15 @@ public class Console extends GameObject {
 			output = output.substring(output.indexOf((char)NEWLINE)+1);
 		
 		output += str + ((char)NEWLINE);
+		consoleTimer=consoleTimer.loop();
 	}
 	
 	public void executeCommand(String str){
 		if(str!=""){
 			outputConsole("> "+str);
 			String[] command = str.split(" ");
-			if(stringEqualsCommand(command[0].toLowerCase())){
+			command[0]=command[0].toLowerCase();
+			if(stringEqualsCommand(command[0])){
 				
 				switch(Command.valueOf(command[0])){
 					case test:

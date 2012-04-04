@@ -6,7 +6,7 @@ import org.newdawn.slick.*;
 
 
 public class VisualObject extends GameObject {
-	
+	//TODO Saker ritas ut på fel ställen, t.ex. x=63.75 ritas på x=63 vilket gör att det blir en pixel fel då den ska ritas på x=64, vet inte vart problemet ligger
 	Image image;
 	double x;
 	double y;

@@ -10,6 +10,7 @@ public class Player extends GameObject {
 	int[] key;
 	int playerID;
 	Entity ent;
+	Alarm testAlarm=new Alarm(100,this);
 	
 	//all dem keys
 	public enum Key{
@@ -63,5 +64,8 @@ public class Player extends GameObject {
 		}
 	}
 	
+	public void callAlarm(Alarm alarm){
+		if(alarm == testAlarm){PlattformMP.console.outputConsole("Testar alarm");}
+	}
 
 }
