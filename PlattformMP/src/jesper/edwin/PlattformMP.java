@@ -19,6 +19,7 @@ public class PlattformMP extends BasicGame {
 	private final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
 	Image sprWhiteBlock, sprPlayer, sprEntityTest;
+	//COMMITA ALLA FILER, Inkl. nya filer och resurser!
 	
 	static Console console = new Console();
 	
