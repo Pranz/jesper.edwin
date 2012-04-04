@@ -6,6 +6,7 @@ import java.util.List;
 import org.newdawn.slick.Image;
 
 /*
+ * PROJECTILE?
  * Any sword, bullet or object that cause damage go into this class
  */
 

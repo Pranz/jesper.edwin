@@ -18,7 +18,7 @@ public class Entity extends InteractiveObject {
 	double maxSpeed = 3;
 	double maxFallSpeed = 5;
 	boolean solid = true;
-	double jumpStrength = 8;
+	double jumpStrength = 10;
 	static List<Entity> list = new ArrayList<Entity>();
 	
 	public Entity(int x, int y, Image image){

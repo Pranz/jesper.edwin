@@ -18,7 +18,7 @@ public class PlattformMP extends BasicGame {
 	private static final int WINDOW_HEIGHT = 480;
 	private final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
-	Image sprWhiteBlock;
+	Image sprWhiteBlock,sprPlayer,sprEntityTest;
 	
 	static Console console = new Console();
 	
@@ -33,9 +33,13 @@ public class PlattformMP extends BasicGame {
 	@Override public void init(GameContainer container) throws SlickException {
 		
 		sprWhiteBlock  = new Image(IMAGE_DIR + "whiteblock.png");
-		player = new Player(new Entity(200, 70, new Image(IMAGE_DIR + "player.png")), 0);
-		new Solid(130, 70, sprWhiteBlock);
-		new Solid(500, 80, sprWhiteBlock);
+		sprPlayer = new Image(IMAGE_DIR + "player.png");
+		sprEntityTest = new Image(IMAGE_DIR + "entity_test.png");
+		player = new Player(new Entity(200, 70, sprPlayer), 0);
+		new Solid(180, 320, sprWhiteBlock);
+		new Solid(500, 300, sprWhiteBlock);
+		new Solid(300, 400, sprWhiteBlock);
+		new BasicCreature(260, 200, sprEntityTest);
 		container.setTargetFrameRate(FPS);
 		globalContainer = container;
 		container.setShowFPS(false);
