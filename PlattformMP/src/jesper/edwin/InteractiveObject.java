@@ -52,11 +52,10 @@ public abstract class InteractiveObject extends VisualObject {
 	}
 	
 	public void move(double xspeed, double yspeed){
-		if(!placeMeeting(x + xspeed, this.y, InteractiveObject.list)){
+		if(!placeMeeting(x + xspeed, y+ yspeed, InteractiveObject.list)){
 			this.x += xspeed;
 			this.y += yspeed;
 		}
-
 	}
 	
 	public boolean placeMeeting(double x, double y, List<? extends InteractiveObject> objectList){

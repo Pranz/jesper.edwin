@@ -55,7 +55,7 @@ public class Entity extends InteractiveObject {
 	}
 	
 	@Override public void move(double xspeed, double yspeed){
-		if(!placeMeeting(x + xspeed, y, InteractiveObject.list)){
+		/*if(!placeMeeting(x + xspeed, y, InteractiveObject.list)){
 			this.x += xspeed;
 		}
 		else hspeed = 0;
@@ -63,8 +63,28 @@ public class Entity extends InteractiveObject {
 		if(!placeMeeting(x, y + yspeed, InteractiveObject.list)){
 			this.y += yspeed;
 		}
-		else vspeed = 0;
-
+		else vspeed = 0;*/
+		
+		//TODO Pixel-perfect move är bara i int än så länge, inga decimaler, fixar sen
+		int _x=GameObject.signum(xspeed);
+		for(int i=0;i<Math.abs(xspeed);i++){
+			if(!placeMeeting(x+_x,y,InteractiveObject.list))
+				this.x+=_x;
+			else{
+				hspeed=0;
+				break;
+			}
+		}
+		
+		int _y=GameObject.signum(yspeed);
+		for(int i=0;i<Math.abs(yspeed);i++){
+			if(!placeMeeting(x,y+_y,InteractiveObject.list))
+				this.y+=_y;
+			else{
+				vspeed=0;
+				break;
+			}
+		}
 	}
 	
 	public void mainAttack(){
