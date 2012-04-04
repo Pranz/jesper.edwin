@@ -66,7 +66,7 @@ public class Entity extends InteractiveObject {
 		else vspeed = 0;*/
 		
 		//TODO Pixel-perfect move fixat med decimaler tror jag, kolla ifall det stämmer. Speed jiggling när man kolliderar igen
-		int _x=GameObject.signum(xspeed),i=0;
+		int _x = signum(xspeed),i=0;
 		for(i=0;i<Math.abs(Math.floor(xspeed));i++){
 			if(!placeMeeting(x+_x,y,InteractiveObject.list))
 				this.x+=_x;
@@ -81,7 +81,7 @@ public class Entity extends InteractiveObject {
 				this.x+=xdecimals;
 		}
 		
-		int _y=GameObject.signum(yspeed);
+		int _y = signum(yspeed);
 		for(i=0;i<Math.abs(yspeed);i++){
 			if(!placeMeeting(x,y+_y,InteractiveObject.list))
 				this.y+=_y;

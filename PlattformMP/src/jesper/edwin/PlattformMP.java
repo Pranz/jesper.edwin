@@ -18,7 +18,7 @@ public class PlattformMP extends BasicGame {
 	private static final int WINDOW_HEIGHT = 480;
 	private final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
-	Image sprWhiteBlock,sprPlayer,sprEntityTest;
+	Image sprWhiteBlock, sprPlayer, sprEntityTest;
 	
 	static Console console = new Console();
 	

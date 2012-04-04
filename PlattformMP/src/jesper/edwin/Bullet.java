@@ -7,6 +7,8 @@ import org.newdawn.slick.Image;
 
 /*
  * PROJECTILE?
+ * ^ Allting kommer fungera som en projektil, även stillbild av t.ex ett svärd.
+ * ^ Tänkte ifall den skulle heta Projectile istället för Bullet 
  * Any sword, bullet or object that cause damage go into this class
  */
 
