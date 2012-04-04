@@ -66,7 +66,8 @@ public class Entity extends InteractiveObject {
 		else vspeed = 0;*/
 		
 		//TODO Pixel-perfect move är bara i int än så länge, inga decimaler, fixar sen
-		int _x=GameObject.signum(xspeed);
+		//Eftersom Entity är en subclass av GameObject behöver du ej skriva GameObject.signum.
+		int _x = signum(xspeed);
 		for(int i=0;i<Math.abs(xspeed);i++){
 			if(!placeMeeting(x+_x,y,InteractiveObject.list))
 				this.x+=_x;
@@ -76,7 +77,7 @@ public class Entity extends InteractiveObject {
 			}
 		}
 		
-		int _y=GameObject.signum(yspeed);
+		int _y = signum(yspeed);
 		for(int i=0;i<Math.abs(yspeed);i++){
 			if(!placeMeeting(x,y+_y,InteractiveObject.list))
 				this.y+=_y;
