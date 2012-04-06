@@ -29,7 +29,7 @@ public class Alarm extends GameObject {
 			host.callAlarm(this);
 			destroy();
 		}
-		if(ticks <= maxTicks) ticks++;
+		if(ticks < maxTicks) ticks++;
 		
 		
 	}

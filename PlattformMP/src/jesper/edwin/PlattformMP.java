@@ -74,7 +74,7 @@ public class PlattformMP extends BasicGame {
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
 		
 		for(VisualObject o : VisualObject.list){
-			g.drawImage(o.image, (int)(o.x), (int)(o.y));
+			o.render(g);
 		}
 		
 		List<String> l = new ArrayList<String>();

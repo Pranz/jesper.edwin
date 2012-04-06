@@ -38,6 +38,9 @@ public class VisualObject extends GameObject {
 		super.update();
 	}
 	
+	public void render(Graphics g){
+		g.drawImage(image, Math.round(x), Math.round(y));
+	}
 	Alarm testAlarm;
 	Alarm secondAlarm;
 	public void callAlarm(Alarm alarm){
