@@ -13,9 +13,9 @@ public class Entity extends InteractiveObject {
 	double gravity = 0.42;
 	double hspeed = 0;
 	double vspeed = 0;
-	double speed = 0.5;
+	double speed = 1.5; //TODO: Uppstår problem när den är 0.3, accelerar inte när den har det värdet eller lägre. Problemet ligger inte i pixel-perfect koden. Har kollat
 	double friction = 0.3;
-	double maxSpeed = 3.5;
+	double maxSpeed = 5.5;
 	double maxFallSpeed = 5;
 	boolean solid = true;
 	double jumpStrength = 10;
@@ -55,51 +55,45 @@ public class Entity extends InteractiveObject {
 	}
 	
 	@Override public void move(double xspeed, double yspeed){
-		/*if(!placeMeeting(x + xspeed, y, InteractiveObject.list)){
-			this.x += xspeed;
-		}
-		else hspeed = 0;
-		
-		if(!placeMeeting(x, y + yspeed, InteractiveObject.list)){
-			this.y += yspeed;
-		}
-		else vspeed = 0;*/
-		
-		//TODO Pixel-perfect move fixat med decimaler tror jag, kolla ifall det stämmer. Speed jiggling när man kolliderar igen
+		//TODO Pixel-perfect moving kanske uppstår problem vid längre sträckor, en risk. Får testa senare
+		//X-movement, horizontal
 		int xdir = signum(xspeed),i=0;
-		for(i=0;i<Math.abs(floorTo0(xspeed));i++){
-			if(!placeMeeting(floorTo0(x+xdir),y,InteractiveObject.list))
-				this.x+=xdir;
-			else{
-				hspeed=0;
+		for(i=0;i<Math.abs(floorTo0(xspeed));i++){ //Kollar om alla positioner inom xspeed framåt är lediga
+			if(!placeMeeting(x+xdir,y,InteractiveObject.list)) //Om +1 är det...
+				this.x+=xdir; //...så rör den ett framåt
+			else{ //...annars
+				hspeed=0; //...sätt hspeed=0 och avbryt for-loop i förväg			
 				break;
 			}
 		}
-		if(i>=Math.abs(floorTo0(xspeed))){
-		
-			double xdecimals=(Math.abs(xspeed)-Math.abs(floorTo0(xspeed)))*xdir;
-			if(!placeMeeting(x+xdecimals,y,InteractiveObject.list)){
+		double xdecimals=(Math.abs(xspeed)-Math.abs(floorTo0(xspeed)))*xdir;
+		if(i>=Math.abs(floorTo0(xspeed))){ //Om den har lyckats flytta sig xspeed framåt i heltal då det är fritt xspeed antal pixlar framåt
+			if(!placeMeeting(x+xdir,y,InteractiveObject.list))
 				this.x+=xdecimals;
-				//Går ej att göra detta, antagligen för att alla objekt är oexakta och ligger på runt t.ex. x=5.000000001 
-				//och då funkar ej collision check när dentta objekt står på x=5.0
-				//if(xdir==1)this.x=floorTo0(this.x);else this.x = ceilTo0(this.x);
-			}
-
-		}
-		
-		int ydir = signum(yspeed);
-		for(i=0;i<Math.abs(floorTo0(yspeed));i++){
-			if(!placeMeeting(x,floorTo0(y+ydir),InteractiveObject.list))
-				this.y+=ydir;
 			else{
-				vspeed=0;
+				if(xdir==1)this.x=floorTo0(this.x);else this.x = ceilTo0(this.x);
+				hspeed=0;
+			}
+		}
+
+		//Y-movement, vertical
+		int ydir = signum(yspeed);
+		for(i=0;i<Math.abs(floorTo0(yspeed));i++){ //Kollar om alla positioner inom xspeed framåt är lediga
+			if(!placeMeeting(x,y+ydir,InteractiveObject.list)) //Om +1 är det...
+				this.y+=ydir; //...så rör den ett framåt
+			else{ //...annars
+				vspeed=0; //...sätt hspeed=0 och avbryt for-loop i förväg			
 				break;
 			}
 		}
-		if(i>=Math.abs(floorTo0(yspeed))){
-			double ydecimals=(Math.abs(yspeed)-Math.abs(floorTo0(yspeed)))*ydir;
-			if(!placeMeeting(x,y+ydecimals,InteractiveObject.list))
+		double ydecimals=(Math.abs(yspeed)-Math.abs(floorTo0(yspeed)))*ydir;
+		if(i>=Math.abs(floorTo0(yspeed))){ //Om den har lyckats flytta sig xspeed framåt i heltal då det är fritt xspeed antal pixlar framåt
+			if(!placeMeeting(x,y+ydir,InteractiveObject.list))
 				this.y+=ydecimals;
+			else{
+				if(ydir==1)this.y=floorTo0(this.y);else this.y = ceilTo0(this.y);
+				vspeed=0;
+			}
 		}
 	}
 	
