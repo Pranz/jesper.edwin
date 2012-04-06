@@ -3,6 +3,7 @@ package jesper.edwin;
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Math;
+import org.newdawn.slick.Graphics;
 
 public abstract class GameObject {
 	
@@ -77,6 +78,16 @@ public abstract class GameObject {
 	        return 1;
 	        }
 	    }
-
-
+	
+	public static final double floorTo0(double frac){
+		if(frac>=0)return(Math.floor(frac));
+		else
+		return(Math.ceil(frac));
+	}
+	
+	public static final double ceilTo0(double frac){
+		if(frac>=0)return(Math.ceil(frac));
+		else
+		return(Math.floor(frac));
+	}
 }

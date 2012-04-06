@@ -5,8 +5,7 @@ import java.util.List;
 import org.newdawn.slick.*;
 
 
-public class VisualObject extends GameObject {
-	//TODO Saker ritas ut på fel ställen, t.ex. x=63.75 ritas på x=63 vilket gör att det blir en pixel fel då den ska ritas på x=64, vet inte vart problemet ligger
+public class VisualObject extends GameObject implements Renderable {
 	Image image;
 	double x;
 	double y;
@@ -22,8 +21,9 @@ public class VisualObject extends GameObject {
 		this.y = y;
 		testAlarm = new Alarm(120, this);
 		secondAlarm = new Alarm(200, this);
+		Renderable.list.add(this);
 	}
-	
+
 	public void move(double xspeed, double yspeed){
 		this.x += xspeed;
 		this.y += yspeed;
@@ -38,9 +38,10 @@ public class VisualObject extends GameObject {
 		super.update();
 	}
 	
-	public void render(Graphics g){
+	@Override public void render(Graphics g){
 		g.drawImage(image, Math.round(x), Math.round(y));
 	}
+	
 	Alarm testAlarm;
 	Alarm secondAlarm;
 	public void callAlarm(Alarm alarm){

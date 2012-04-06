@@ -73,7 +73,8 @@ public class PlattformMP extends BasicGame {
 	
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
 		
-		for(VisualObject o : VisualObject.list){
+
+		for(Renderable o : Renderable.list){
 			o.render(g);
 		}
 		
@@ -86,7 +87,7 @@ public class PlattformMP extends BasicGame {
 		l.add("x: " + player.ent.x);
 		l.add("y: " + player.ent.y);
 		l.add("Console Timer: "+console.consoleTimer.ticks+" / "+console.consoleTimer.maxTicks);
-		//TODO Om man kollar på console timer variabeln i startup så ser man att den springer till 100 och gör reset, varför?
+		//TODO Om man kollar på console timer variabeln i startup så ser man att den springer till 100 och gör reset, sedan går den som vanligt. Varför?
 		
 		drawList(g,l);
 		

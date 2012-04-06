@@ -15,7 +15,7 @@ public class Entity extends InteractiveObject {
 	double vspeed = 0;
 	double speed = 0.5;
 	double friction = 0.3;
-	double maxSpeed = 3;
+	double maxSpeed = 3.5;
 	double maxFallSpeed = 5;
 	boolean solid = true;
 	double jumpStrength = 10;
@@ -66,32 +66,38 @@ public class Entity extends InteractiveObject {
 		else vspeed = 0;*/
 		
 		//TODO Pixel-perfect move fixat med decimaler tror jag, kolla ifall det stämmer. Speed jiggling när man kolliderar igen
-		int _x = signum(xspeed),i=0;
-		for(i=0;i<Math.abs(Math.floor(xspeed));i++){
-			if(!placeMeeting(x+_x,y,InteractiveObject.list))
-				this.x+=_x;
+		int xdir = signum(xspeed),i=0;
+		for(i=0;i<Math.abs(floorTo0(xspeed));i++){
+			if(!placeMeeting(floorTo0(x+xdir),y,InteractiveObject.list))
+				this.x+=xdir;
 			else{
 				hspeed=0;
 				break;
 			}
 		}
-		if(i>=Math.abs(Math.floor(xspeed))){
-			double xdecimals=(Math.abs(xspeed)-Math.abs(Math.floor(xspeed)))*_x;
-			if(!placeMeeting(x+xdecimals,y,InteractiveObject.list))
+		if(i>=Math.abs(floorTo0(xspeed))){
+		
+			double xdecimals=(Math.abs(xspeed)-Math.abs(floorTo0(xspeed)))*xdir;
+			if(!placeMeeting(x+xdecimals,y,InteractiveObject.list)){
 				this.x+=xdecimals;
+				//Går ej att göra detta, antagligen för att alla objekt är oexakta och ligger på runt t.ex. x=5.000000001 
+				//och då funkar ej collision check när dentta objekt står på x=5.0
+				//if(xdir==1)this.x=floorTo0(this.x);else this.x = ceilTo0(this.x);
+			}
+
 		}
 		
-		int _y = signum(yspeed);
-		for(i=0;i<Math.abs(yspeed);i++){
-			if(!placeMeeting(x,y+_y,InteractiveObject.list))
-				this.y+=_y;
+		int ydir = signum(yspeed);
+		for(i=0;i<Math.abs(floorTo0(yspeed));i++){
+			if(!placeMeeting(x,floorTo0(y+ydir),InteractiveObject.list))
+				this.y+=ydir;
 			else{
 				vspeed=0;
 				break;
 			}
 		}
-		if(i>=Math.abs(Math.floor(yspeed))){
-			double ydecimals=(Math.abs(yspeed)-Math.abs(Math.floor(yspeed)))*_y;
+		if(i>=Math.abs(floorTo0(yspeed))){
+			double ydecimals=(Math.abs(yspeed)-Math.abs(floorTo0(yspeed)))*ydir;
 			if(!placeMeeting(x,y+ydecimals,InteractiveObject.list))
 				this.y+=ydecimals;
 		}
