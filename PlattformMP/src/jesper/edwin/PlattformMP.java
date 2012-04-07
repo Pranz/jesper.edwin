@@ -18,7 +18,8 @@ public class PlattformMP extends BasicGame {
 	private static final int WINDOW_HEIGHT = 480;
 	private final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
-	Image sprWhiteBlock, sprPlayer, sprEntityTest;
+	Image sprWhiteBlock, sprPlayer, sprEntityTest, sprTriangle;
+	boolean initiated = false;
 	
 	static Console console = new Console();
 	
@@ -35,10 +36,9 @@ public class PlattformMP extends BasicGame {
 		sprWhiteBlock  = new Image(IMAGE_DIR + "whiteblock.png");
 		sprPlayer = new Image(IMAGE_DIR + "player.png");
 		sprEntityTest = new Image(IMAGE_DIR + "entity_test.png");
+		sprTriangle = new Image(IMAGE_DIR + "whitetriangle.png");
 		player = new Player(new Entity(200, 70, sprPlayer), 0);
 		new Solid(180, 320, sprWhiteBlock);
-		new Solid(500, 300, sprWhiteBlock);
-		new Solid(300, 400, sprWhiteBlock);
 		new BasicCreature(260, 200, sprEntityTest);
 		container.setTargetFrameRate(FPS);
 		globalContainer = container;
@@ -48,6 +48,11 @@ public class PlattformMP extends BasicGame {
 			new Solid(i*32, WINDOW_HEIGHT-32, sprWhiteBlock);
 		}
 		
+		for(int i = 0; i < 10; i++){
+			new SlopeTerrain(320 + 32*i, WINDOW_HEIGHT - 32*i, sprTriangle);
+		}
+		
+		initiated = true;
 	} 
 	
 	@Override public void update(GameContainer container, int delta) throws SlickException {
@@ -73,7 +78,7 @@ public class PlattformMP extends BasicGame {
 	
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
 		
-
+		
 		for(Renderable o : Renderable.list){
 			o.render(g);
 		}
@@ -87,11 +92,13 @@ public class PlattformMP extends BasicGame {
 		l.add("x: " + player.ent.x);
 		l.add("y: " + player.ent.y);
 		l.add("Console Timer: "+console.consoleTimer.ticks+" / "+console.consoleTimer.maxTicks);
+		l.add("Angle: " + GameObject.directionToPoint(player.ent.previousX, player.ent.previousY, player.ent.x, player.ent.y));
 		//TODO Om man kollar på console timer variabeln i startup så ser man att den springer till 100 och gör reset, sedan går den som vanligt. Varför?
 		
 		drawList(g,l);
 		
 		drawconsole(g);
+		
 	} 
 	
 	

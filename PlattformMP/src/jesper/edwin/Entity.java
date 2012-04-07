@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.geom.*;
 
 public class Entity extends InteractiveObject {
 	
@@ -20,6 +19,7 @@ public class Entity extends InteractiveObject {
 	boolean solid = true;
 	double jumpStrength = 10;
 	static List<Entity> list = new ArrayList<Entity>();
+	private static final double SQRT_2 = 1.41421;
 	
 	public Entity(int x, int y, Image image){
 		super(x, y, image);
@@ -49,6 +49,7 @@ public class Entity extends InteractiveObject {
 		super.callAlarm(alarm);
 	}
 	
+	
 	public void walk(double direction){
 		//direction is either 1 for right, -1 for left
 		hspeed = increaseNumberTo(hspeed, speed, maxSpeed*direction);
@@ -59,27 +60,39 @@ public class Entity extends InteractiveObject {
 		//X-movement, horizontal
 		int xdir = signum(xspeed),i=0;
 		for(i=0;i<Math.abs(floorTo0(xspeed));i++){ //Kollar om alla positioner inom xspeed framåt är lediga
-			if(!placeMeeting(x+xdir,y,InteractiveObject.list)) //Om +1 är det...
+			if(!placeMeeting(x+xdir, y, Terrain.list)) //Om +1 är det...
 				this.x+=xdir; //...så rör den ett framåt
+
 			else{ //...annars
-				hspeed=0; //...sätt hspeed=0 och avbryt for-loop i förväg			
-				break;
+				InteractiveObject conflict = getCollidedObject(x+xdir, y, Terrain.list);
+				if(!placeMeeting(x+xdir, y-1, conflict)){
+					x += xdir/SQRT_2;
+					y -= 1/SQRT_2;
+				}
+				else{
+					hspeed=0; //...sätt hspeed=0 och avbryt for-loop i förväg			
+					break;
+				}
+
 			}
 		}
 		double xdecimals=(Math.abs(xspeed)-Math.abs(floorTo0(xspeed)))*xdir;
 		if(i>=Math.abs(floorTo0(xspeed))){ //Om den har lyckats flytta sig xspeed framåt i heltal då det är fritt xspeed antal pixlar framåt
-			if(!placeMeeting(x+xdir,y,InteractiveObject.list))
+			if(!placeMeeting(x+xdir,y,Terrain.list))
 				this.x+=xdecimals;
 			else{
-				if(xdir==1)this.x=floorTo0(this.x);else this.x = ceilTo0(this.x);
-				hspeed=0;
+				if(xdir==1) 
+					this.x=floorTo0(this.x);
+				else this.x = ceilTo0(this.x);
+				//InteractiveObject conflict = getCollidedObject(x+xdir, y, Terrain.list);
+				//hspeed=0;
 			}
 		}
 
 		//Y-movement, vertical
 		int ydir = signum(yspeed);
 		for(i=0;i<Math.abs(floorTo0(yspeed));i++){ //Kollar om alla positioner inom xspeed framåt är lediga
-			if(!placeMeeting(x,y+ydir,InteractiveObject.list)) //Om +1 är det...
+			if(!placeMeeting(x,y+ydir,Terrain.list)) //Om +1 är det...
 				this.y+=ydir; //...så rör den ett framåt
 			else{ //...annars
 				vspeed=0; //...sätt hspeed=0 och avbryt for-loop i förväg			
@@ -88,7 +101,7 @@ public class Entity extends InteractiveObject {
 		}
 		double ydecimals=(Math.abs(yspeed)-Math.abs(floorTo0(yspeed)))*ydir;
 		if(i>=Math.abs(floorTo0(yspeed))){ //Om den har lyckats flytta sig xspeed framåt i heltal då det är fritt xspeed antal pixlar framåt
-			if(!placeMeeting(x,y+ydir,InteractiveObject.list))
+			if(!placeMeeting(x,y+ydir,Terrain.list))
 				this.y+=ydecimals;
 			else{
 				if(ydir==1)this.y=floorTo0(this.y);else this.y = ceilTo0(this.y);

@@ -9,6 +9,8 @@ public class VisualObject extends GameObject implements Renderable {
 	Image image;
 	double x;
 	double y;
+	double previousX;
+	double previousY;
 
 	
 	static List<VisualObject> list = new ArrayList<VisualObject>();
@@ -19,6 +21,8 @@ public class VisualObject extends GameObject implements Renderable {
 		this.image = image;
 		this.x = x;
 		this.y = y;
+		previousX = x;
+		previousY = y;
 		testAlarm = new Alarm(120, this);
 		secondAlarm = new Alarm(200, this);
 		Renderable.list.add(this);
@@ -36,10 +40,12 @@ public class VisualObject extends GameObject implements Renderable {
 	
 	@Override public void update(){
 		super.update();
+		previousX = x;
+		previousY = y;
 	}
 	
 	@Override public void render(Graphics g){
-		g.drawImage(image, Math.round(x), Math.round(y));
+		if(image != null)g.drawImage(image, Math.round(x), Math.round(y));
 	}
 	
 	Alarm testAlarm;

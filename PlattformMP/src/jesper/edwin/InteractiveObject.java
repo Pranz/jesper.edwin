@@ -21,9 +21,8 @@ public abstract class InteractiveObject extends VisualObject {
 	public InteractiveObject(double x, double y, Image image) {
 		super(x, y, image);
 		list.add(this);
-		hitbox = new Rectangle((float)x, (float)y, (float)image.getWidth()-1, (float)image.getHeight()-1);
-
-		
+		if(image != null)hitbox = new Rectangle((float)x, (float)y, (float)image.getWidth()-1, (float)image.getHeight()-1);
+		else hitbox = new Line(0,0);
 
 	}
 	
@@ -51,6 +50,16 @@ public abstract class InteractiveObject extends VisualObject {
 		return false;
 	}
 	
+	public InteractiveObject getCollidedObject(double x, double y, List<? extends InteractiveObject> objectList){
+		if(objectList.contains(this))objectList.remove(this);
+		
+		for(InteractiveObject object : objectList){
+			if(new Rectangle((float)x, (float)y,  hitbox.getWidth(), hitbox.getHeight()).intersects(object.hitbox))return object;
+		}
+		
+		return null;
+	}
+	
 	public void move(double xspeed, double yspeed){
 		if(!placeMeeting(x + xspeed, y+ yspeed, InteractiveObject.list)){
 			this.x += xspeed;
@@ -58,8 +67,20 @@ public abstract class InteractiveObject extends VisualObject {
 		}
 	}
 	
+	public double lengthDirX(double angle, double length){
+		return Math.sin(Math.toRadians(angle)) * length;
+	}
+	
+	public double lengthDirY(double angle, double length){
+		return Math.cos(Math.toRadians(angle)) * length;
+	}
+	
 	public boolean placeMeeting(double x, double y, List<? extends InteractiveObject> objectList){
 		return collidesWithObject(objectList, new Rectangle((float)x, (float)y,  hitbox.getWidth(), hitbox.getHeight()));
+	}
+	
+	public boolean placeMeeting(double x, double y, InteractiveObject object){
+		return collidesWithObject(object, new Rectangle((float)x, (float)y,  hitbox.getWidth(), hitbox.getHeight()));
 	}
 	
 	public List<? extends InteractiveObject> getCollidedObjects(List<? extends InteractiveObject> typeList){

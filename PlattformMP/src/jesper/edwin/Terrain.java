@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.geom.*;
 
 public class Terrain extends InteractiveObject {
 	
@@ -12,6 +11,7 @@ public class Terrain extends InteractiveObject {
 	
 	boolean walkable = true;
 	boolean solid = true;
+	double angle = 0;
 	
 	public Terrain(double x, double y, Image image){
 		super(x, y, image);

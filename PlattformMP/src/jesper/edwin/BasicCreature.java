@@ -13,10 +13,16 @@ public class BasicCreature extends Entity {
 	public BasicCreature(int x, int y, Image image) {
 		super(x, y, image, true);
 		list.add(this);
+		gravity = 0;
 	}
 	
 	@Override public void mainAttack(){
 		
+	}
+	
+	@Override public void update(){
+		super.update();
+		move(lengthDirX(90, 5), lengthDirY(90, 5));
 	}
 
 

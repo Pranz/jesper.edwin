@@ -3,7 +3,6 @@ package jesper.edwin;
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Math;
-import org.newdawn.slick.Graphics;
 
 public abstract class GameObject {
 	
@@ -90,4 +89,10 @@ public abstract class GameObject {
 		else
 		return(Math.floor(frac));
 	}
+	
+	public static double directionToPoint(double x1, double y1, double x2, double y2){
+		return (Math.toDegrees(Math.atan2(x2-x1,y2-y1)) + 270) % 360;
+	}
+	
+
 }
