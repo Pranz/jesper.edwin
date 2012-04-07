@@ -22,8 +22,8 @@ public class SlopeTerrain extends Terrain {
 		list.add(this);
 		hitbox = new Polygon(new float[]{
 				(float)x, (float)(y + image.getHeight()),
-				(float)x + image.getHeight(), (float)y + image.getHeight(),
-				(float)x + image.getHeight(), (float)y
+				(float)x + image.getWidth(), (float)y + image.getHeight(),
+				(float)x + image.getWidth(), (float)y
 		});
 	}
 

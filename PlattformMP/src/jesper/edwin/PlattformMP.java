@@ -18,7 +18,7 @@ public class PlattformMP extends BasicGame {
 	private static final int WINDOW_HEIGHT = 480;
 	private final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
-	Image sprWhiteBlock, sprPlayer, sprEntityTest, sprTriangle;
+	Image sprWhiteBlock, sprPlayer, sprEntityTest, sprTriangle, sprTriangle2;
 	boolean initiated = false;
 	
 	static Console console = new Console();
@@ -37,12 +37,15 @@ public class PlattformMP extends BasicGame {
 		sprPlayer = new Image(IMAGE_DIR + "player.png");
 		sprEntityTest = new Image(IMAGE_DIR + "entity_test.png");
 		sprTriangle = new Image(IMAGE_DIR + "whitetriangle.png");
+		sprTriangle2 = new Image(IMAGE_DIR + "whitetriangle2.png");
 		player = new Player(new Entity(200, 70, sprPlayer), 0);
 		new Solid(180, 320, sprWhiteBlock);
 		new BasicCreature(260, 200, sprEntityTest);
 		container.setTargetFrameRate(FPS);
 		globalContainer = container;
 		container.setShowFPS(false);
+		
+		new SlopeTerrain(220, WINDOW_HEIGHT - 64, sprTriangle2);
 		
 		for(int i = 0; i < WINDOW_WIDTH / 32; i++){
 			new Solid(i*32, WINDOW_HEIGHT-32, sprWhiteBlock);
@@ -93,7 +96,6 @@ public class PlattformMP extends BasicGame {
 		l.add("y: " + player.ent.y);
 		l.add("Console Timer: "+console.consoleTimer.ticks+" / "+console.consoleTimer.maxTicks);
 		l.add("Angle: " + GameObject.directionToPoint(player.ent.previousX, player.ent.previousY, player.ent.x, player.ent.y));
-		//TODO Om man kollar på console timer variabeln i startup så ser man att den springer till 100 och gör reset, sedan går den som vanligt. Varför?
 		
 		drawList(g,l);
 		

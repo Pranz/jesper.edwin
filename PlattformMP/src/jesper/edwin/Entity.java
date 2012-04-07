@@ -12,9 +12,9 @@ public class Entity extends InteractiveObject {
 	double gravity = 0.42;
 	double hspeed = 0;
 	double vspeed = 0;
-	double speed = 1.5; //TODO: Uppstår problem när den är 0.3, accelerar inte när den har det värdet eller lägre. Problemet ligger inte i pixel-perfect koden. Har kollat
+	double speed = 1.5;
 	double friction = 0.3;
-	double maxSpeed = 5.5;
+	double maxSpeed = 4;
 	double maxFallSpeed = 5;
 	boolean solid = true;
 	double jumpStrength = 10;
