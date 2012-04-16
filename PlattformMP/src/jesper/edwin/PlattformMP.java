@@ -4,6 +4,8 @@ package jesper.edwin;
 import org.newdawn.slick.*; 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.lang.Math;
 
@@ -83,9 +85,19 @@ public class PlattformMP extends BasicGame {
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
 		
 		//TODO: Render prioritet som Game Makers depth
-		for(Renderable o : Renderable.list){
+	    Collections.sort(VisualObject.list, new Comparator<Object>(){
+
+	        public int compare(Object o1, Object o2) {
+	            VisualObject v1 = (VisualObject) o1;
+	            VisualObject v2 = (VisualObject) o2;
+	           return (v1.depth - v2.depth);
+	        }});
+
+		
+		for(VisualObject o : VisualObject.list){
 			o.render(g);
 		}
+		console.render(g);
 		
 		List<String> l = new ArrayList<String>();
 		l.add("FPS: " + container.getFPS());

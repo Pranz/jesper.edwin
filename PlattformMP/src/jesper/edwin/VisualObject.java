@@ -11,7 +11,8 @@ public class VisualObject extends GameObject implements Renderable {
 	double y;
 	double previousX;
 	double previousY;
-
+	public int depth = 0;
+	
 	
 	static List<VisualObject> list = new ArrayList<VisualObject>();
 	

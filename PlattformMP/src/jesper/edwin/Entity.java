@@ -58,7 +58,8 @@ public class Entity extends InteractiveObject {
 	@Override public void move(double xspeed, double yspeed){
 		//TODO Pixel-perfect moving kanske uppstår problem vid längre sträckor, en risk. Får testa senare
 		//X-movement, horizontal
-		int xdir = signum(xspeed),i=0;
+		int xdir = signum(xspeed);
+		double i;
 		for(i=0;i<Math.abs(floorTo0(xspeed));i++){ //Kollar om alla positioner inom xspeed framåt är lediga
 			if(!placeMeeting(x+xdir, y, Terrain.list)) //Om +1 är det...
 				this.x+=xdir; //...så rör den ett framåt
@@ -66,8 +67,9 @@ public class Entity extends InteractiveObject {
 			else{ //...annars
 				InteractiveObject conflict = getCollidedObject(x+xdir, y, Terrain.list);
 				if(!placeMeeting(x+xdir, y-1, conflict)){
-					x += xdir/SQRT_2;
-					y -= 1/SQRT_2;
+					x += xdir;
+					y -= 1;
+					i += SQRT_2 - 1;
 				}
 				else{
 					hspeed=0; //...sätt hspeed=0 och avbryt for-loop i förväg			

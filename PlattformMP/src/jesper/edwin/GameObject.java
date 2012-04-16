@@ -12,7 +12,7 @@ public abstract class GameObject {
 	static final int LEFT = -1;
 	boolean cuedForRemoval = false;
 	Alarm superTest;
-	
+
 	public GameObject(){
 		list.add(this);
 	}
