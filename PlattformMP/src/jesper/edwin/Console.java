@@ -1,6 +1,9 @@
 package jesper.edwin;
 
-public class Console extends GameObject {
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+
+public class Console extends GameObject implements Renderable{
 	
 	public boolean isOn = false;
 	public String input = "";
@@ -15,7 +18,32 @@ public class Console extends GameObject {
 	}
 	
 	public Console(){
-
+		Renderable.list.add(this);
+	}
+	
+	@Override public void render(Graphics g){
+		if(isOn||consoleTimer.ticks<consoleTimer.maxTicks){
+			int alpha=255;
+			if(consoleTimer.ticks<consoleTimer.maxTicks)
+				alpha=255-((int)(((float)consoleTimer.ticks/consoleTimer.maxTicks)*255));
+			//TODO Göra till List istället för array
+			String[] consoleOut = output.split(Character.toString((char)10));
+			for(int i = 0; i < consoleOut.length; i++){
+				g.setColor(new Color(0,0,0,alpha));
+				g.drawString(consoleOut[i], 6+2, PlattformMP.WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20)+2);
+				g.drawString(consoleOut[i], 6-2, PlattformMP.WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20)-2);
+				g.setColor(new Color(255,255,255,alpha));
+				g.drawString(consoleOut[i], 6, PlattformMP.WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20));
+				g.setColor(Color.white);
+			}
+		}
+		if(isOn){
+			g.setColor(Color.darkGray);
+			g.fillRect(0,PlattformMP.WINDOW_HEIGHT-20,PlattformMP.WINDOW_WIDTH,PlattformMP.WINDOW_HEIGHT);
+			g.setColor(Color.white);
+			g.drawString("> " + input, 6, PlattformMP.WINDOW_HEIGHT-20);
+			g.drawLine(26+input.length()*9, PlattformMP.WINDOW_HEIGHT-20+2, 26+input.length()*9, PlattformMP.WINDOW_HEIGHT-2);
+		}
 	}
 	
 	public void enterConsole(){

@@ -13,9 +13,9 @@ public class PlattformMP extends BasicGame {
 	Player player;
 	static boolean PAUSE = false;
 	
-	private final int FPS = 60;
-	private static final int WINDOW_WIDTH = 640;
-	private static final int WINDOW_HEIGHT = 480;
+	public final int FPS = 60;
+	public static final int WINDOW_WIDTH = 640;
+	public static final int WINDOW_HEIGHT = 480;
 	private final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
 	Image sprWhiteBlock, sprPlayer, sprEntityTest, sprTriangle, sprTriangle2;
@@ -81,7 +81,7 @@ public class PlattformMP extends BasicGame {
 	
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
 		
-		
+		//TODO: Render prioritet som Game Makers depth
 		for(Renderable o : Renderable.list){
 			o.render(g);
 		}
@@ -98,8 +98,6 @@ public class PlattformMP extends BasicGame {
 		l.add("Angle: " + GameObject.directionToPoint(player.ent.previousX, player.ent.previousY, player.ent.x, player.ent.y));
 		
 		drawList(g,l);
-		
-		drawconsole(g);
 		
 	} 
 	
@@ -139,31 +137,6 @@ public class PlattformMP extends BasicGame {
 	private void handleInput(GameContainer gc) throws SlickException {
 		gc.getInput().addKeyListener(keyboard);
 		
-	}
-	
-	private void drawconsole(Graphics g){
-		if(console.isOn||console.consoleTimer.ticks<console.consoleTimer.maxTicks){
-			int alpha=255;
-			if(console.consoleTimer.ticks<console.consoleTimer.maxTicks)
-				alpha=255-((int)(((float)console.consoleTimer.ticks/console.consoleTimer.maxTicks)*255));
-			//TODO Göra till List istället för array
-			String[] consoleOut = console.output.split(Character.toString((char)10));
-			for(int i = 0; i < consoleOut.length; i++){
-				g.setColor(new Color(0,0,0,alpha));
-				g.drawString(consoleOut[i], 6+2, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20)+2);
-				g.drawString(consoleOut[i], 6-2, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20)-2);
-				g.setColor(new Color(255,255,255,alpha));
-				g.drawString(consoleOut[i], 6, WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20));
-				g.setColor(Color.white);
-			}
-		}
-		if(console.isOn){
-			g.setColor(Color.darkGray);
-			g.fillRect(0,WINDOW_HEIGHT-20,WINDOW_WIDTH,WINDOW_HEIGHT);
-			g.setColor(Color.white);
-			g.drawString("> " + console.input, 6, WINDOW_HEIGHT-20);
-			g.drawLine(26+console.input.length()*9, WINDOW_HEIGHT-20+2, 26+console.input.length()*9, WINDOW_HEIGHT-2);
-		}
 	}
 	
 	public void drawList(Graphics g, List<String> list){
