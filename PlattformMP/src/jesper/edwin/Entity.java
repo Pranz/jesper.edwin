@@ -35,9 +35,10 @@ public class Entity extends InteractiveObject {
 	
 	@Override public void update(){
 		super.update();
+		vspeed += gravity;
 		move(hspeed, vspeed);
 		hspeed = increaseNumberTo(hspeed, friction, 0);
-		vspeed += gravity;
+
 	}
 	
 	@Override public void destroy(){
@@ -125,5 +126,13 @@ public class Entity extends InteractiveObject {
 		hspeed = newHspeed;
 		vspeed = newVspeed;
 	}
+	
+	/*
+	 * TODO: Ej färdig kod, fixar sen, ville ladda upp Render bullshit.
+	 public int getHeightDifference(int direction){
+	 	if((!placeMeeting(x + direction, y, Terrain.list)) && (placeMeeting(x + direction, y + 1, Terrain.list))) return 0;
+		
+	}
+	*/
 
 }

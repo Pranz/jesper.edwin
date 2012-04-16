@@ -3,7 +3,7 @@ package jesper.edwin;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-public class Console extends GameObject implements Renderable{
+public class Console extends Renderable{
 	
 	public boolean isOn = false;
 	public String input = "";
@@ -18,7 +18,7 @@ public class Console extends GameObject implements Renderable{
 	}
 	
 	public Console(){
-		Renderable.list.add(this);
+		depth = 10;
 	}
 	
 	@Override public void render(Graphics g){

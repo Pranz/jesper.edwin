@@ -85,19 +85,19 @@ public class PlattformMP extends BasicGame {
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
 		
 		//TODO: Render prioritet som Game Makers depth
-	    Collections.sort(VisualObject.list, new Comparator<Object>(){
+	    Collections.sort(Renderable.list, new Comparator<Object>(){
 
 	        public int compare(Object o1, Object o2) {
-	            VisualObject v1 = (VisualObject) o1;
-	            VisualObject v2 = (VisualObject) o2;
+	        	Renderable v1 = (Renderable) o1;
+	        	Renderable v2 = (Renderable) o2;
 	           return (v1.depth - v2.depth);
 	        }});
 
 		
-		for(VisualObject o : VisualObject.list){
+		for(Renderable o : Renderable.list){
 			o.render(g);
 		}
-		console.render(g);
+
 		
 		List<String> l = new ArrayList<String>();
 		l.add("FPS: " + container.getFPS());
