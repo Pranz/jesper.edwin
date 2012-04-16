@@ -23,8 +23,6 @@ public class VisualObject extends GameObject implements Renderable {
 		this.y = y;
 		previousX = x;
 		previousY = y;
-		testAlarm = new Alarm(120, this);
-		secondAlarm = new Alarm(200, this);
 		Renderable.list.add(this);
 	}
 
@@ -47,20 +45,4 @@ public class VisualObject extends GameObject implements Renderable {
 	@Override public void render(Graphics g){
 		if(image != null)g.drawImage(image, Math.round(x)-Math.round(PlattformMP.camera.getDrawX()), Math.round(y)-Math.round(PlattformMP.camera.getDrawY()));
 	}
-	
-	Alarm testAlarm;
-	Alarm secondAlarm;
-	public void callAlarm(Alarm alarm){
-		/*
-		 * Examples for alarms, I'll leave them here
-		 * 
-		if(alarm == testAlarm){
-			System.out.println("Ypy");
-			testAlarm = alarm.loop();
-		}
-		if(alarm == secondAlarm)System.out.println("Yoyoyo");
-		*/
-	}
-	
-
 }
