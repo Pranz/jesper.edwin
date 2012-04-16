@@ -10,14 +10,14 @@ public class Camera extends GameObject{
 	private static double drawX_followMargin=-300;
 	private static double drawY_followMargin=-300;
 	
-	public static boolean drawX_minEnabled=false;
-	private static double drawX_min=0;
+	public static boolean drawX_minEnabled=true;
+	public static double drawX_min=0;
 	public static boolean drawX_maxEnabled=false;
-	private static double drawX_max=0;
+	public static double drawX_max=0;
 	public static boolean drawY_minEnabled=false;
-	private static double drawY_min=0;
+	public static double drawY_min=0;
 	public static boolean drawY_maxEnabled=true;
-	private static double drawY_max=1000;
+	public static double drawY_max=1000;
 	
 	public static Entity followsObject=null;
 
@@ -28,7 +28,7 @@ public class Camera extends GameObject{
 	public void cameraMoveX(double x){
 		if(Math.signum(x)==1){
 			if(drawX_maxEnabled)
-				drawX=Math.min(drawX+x,drawX_max);
+				drawX=Math.min(drawX+x,drawX_max-PlattformMP.WINDOW_WIDTH);
 			else
 				drawX+=x;
 		}
@@ -43,7 +43,7 @@ public class Camera extends GameObject{
 	public void cameraMoveY(double y){
 		if(Math.signum(y)==1){
 			if(drawY_maxEnabled)
-				drawY=Math.min(drawY+y,drawY_max);
+				drawY=Math.min(drawY+y,drawY_max-PlattformMP.WINDOW_HEIGHT);
 			else
 				drawY+=y;
 		}
@@ -58,7 +58,7 @@ public class Camera extends GameObject{
 	public void cameraSetX(double x){
 		if(Math.signum(x)==1){
 			if(drawX_maxEnabled)
-				drawX=Math.min(x,drawX_max);
+				drawX=Math.min(x,drawX_max-PlattformMP.WINDOW_WIDTH);
 			else
 				drawX=x;
 		}
@@ -73,7 +73,7 @@ public class Camera extends GameObject{
 	public void cameraSetY(double y){
 		if(Math.signum(y)==1){
 			if(drawY_maxEnabled)
-				drawY=Math.min(y,drawY_max);
+				drawY=Math.min(y,drawY_max-PlattformMP.WINDOW_HEIGHT);
 			else
 				drawY=y;
 		}

@@ -18,7 +18,7 @@ public class PlattformMP extends BasicGame {
 	public final int FPS = 60;
 	public static final int WINDOW_WIDTH = 640;
 	public static final int WINDOW_HEIGHT = 480;
-	private final String WORK_DIR =System.getProperty("user.dir");
+	private static final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
 	Image sprWhiteBlock, sprPlayer, sprEntityTest, sprTriangle, sprTriangle2;
 	boolean initiated = false;
@@ -157,6 +157,10 @@ public class PlattformMP extends BasicGame {
 		for(int i = 0; i < list.size(); i++){
 			g.drawString(list.get(i), 0, i*18);
 		}
+	}
+	
+	public static String getWorkDir(){
+		return WORK_DIR;
 	}
 	
 }

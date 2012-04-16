@@ -1,6 +1,7 @@
 package jesper.edwin;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
 
 public class Console extends GameObject implements Renderable{
@@ -39,6 +40,7 @@ public class Console extends GameObject implements Renderable{
 		}
 		if(isOn){
 			g.setColor(Color.darkGray);
+			//g.setFont(Fonts.arc);
 			g.fillRect(0,PlattformMP.WINDOW_HEIGHT-20,PlattformMP.WINDOW_WIDTH,PlattformMP.WINDOW_HEIGHT);
 			g.setColor(Color.white);
 			g.drawString("> " + input, 6, PlattformMP.WINDOW_HEIGHT-20);
