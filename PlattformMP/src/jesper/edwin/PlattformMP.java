@@ -10,7 +10,7 @@ import java.lang.Math;
 
 public class PlattformMP extends BasicGame { 
 	
-	Player player;
+	static Player player;
 	static boolean PAUSE = false;
 	
 	public final int FPS = 60;
@@ -22,6 +22,7 @@ public class PlattformMP extends BasicGame {
 	boolean initiated = false;
 	
 	static Console console = new Console();
+	static Camera camera = new Camera();
 	
 	Keyboard keyboard = new Keyboard();
 	static GameContainer globalContainer;
@@ -96,6 +97,7 @@ public class PlattformMP extends BasicGame {
 		l.add("y: " + player.ent.y);
 		l.add("Console Timer: "+console.consoleTimer.ticks+" / "+console.consoleTimer.maxTicks);
 		l.add("Angle: " + GameObject.directionToPoint(player.ent.previousX, player.ent.previousY, player.ent.x, player.ent.y));
+		l.add("Camera: " + camera.getDrawX() + ","+camera.getDrawY());
 		
 		drawList(g,l);
 		

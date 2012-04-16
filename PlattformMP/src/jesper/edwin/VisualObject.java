@@ -45,7 +45,7 @@ public class VisualObject extends GameObject implements Renderable {
 	}
 	
 	@Override public void render(Graphics g){
-		if(image != null)g.drawImage(image, Math.round(x), Math.round(y));
+		if(image != null)g.drawImage(image, Math.round(x)-Math.round(PlattformMP.camera.getDrawX()), Math.round(y)-Math.round(PlattformMP.camera.getDrawY()));
 	}
 	
 	Alarm testAlarm;

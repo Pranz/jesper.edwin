@@ -15,9 +15,5 @@ public class Solid extends Terrain {
 		super(x, y, image);
 		list.add(this);
 	}
-	
-	@Override public void render(Graphics g){
-		g.drawImage(image, Math.round(x), Math.round(y));
-	}
 
 }
