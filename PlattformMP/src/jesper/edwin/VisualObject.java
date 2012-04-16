@@ -5,13 +5,12 @@ import java.util.List;
 import org.newdawn.slick.*;
 
 
-public class VisualObject extends GameObject implements Renderable {
+public class VisualObject extends Renderable {
 	Image image;
 	double x;
 	double y;
 	double previousX;
 	double previousY;
-	public int depth = 0;
 	
 	
 	static List<VisualObject> list = new ArrayList<VisualObject>();
@@ -24,7 +23,6 @@ public class VisualObject extends GameObject implements Renderable {
 		this.y = y;
 		previousX = x;
 		previousY = y;
-		Renderable.list.add(this);
 	}
 
 	public void move(double xspeed, double yspeed){

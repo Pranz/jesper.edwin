@@ -9,11 +9,16 @@ import org.newdawn.slick.Graphics;
  * @author Jesper Fridefors
  *
  */
-public interface Renderable {
+public abstract class Renderable extends GameObject {
 	
 	static List<Renderable> list = new ArrayList<Renderable>();
+	int depth = 0;
 	
-	public void render(Graphics g);
+	public abstract void render(Graphics g);
+	
+	public Renderable(){
+		list.add(this);
+	}
 	
 	
 	
