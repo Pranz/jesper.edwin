@@ -58,7 +58,6 @@ public class Player extends GameObject {
 		if(input.isKeyDown(Input.KEY_DOWN)){
 			
 		}
-		
 		if(input.isKeyDown(Input.KEY_Z)){
 			if(ent.placeMeeting(ent.x, Math.ceil(ent.y) + 1, Terrain.list)) ent.vspeed -= ent.jumpStrength;
 		}

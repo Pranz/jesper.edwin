@@ -1,7 +1,6 @@
 package jesper.edwin;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
 
 public class Console extends Renderable{
@@ -23,6 +22,7 @@ public class Console extends Renderable{
 	}
 	
 	@Override public void render(Graphics g){
+		g.setFont(PlattformMP.fontDefault);
 		if(isOn||consoleTimer.ticks<consoleTimer.maxTicks){
 			int alpha=255;
 			if(consoleTimer.ticks<consoleTimer.maxTicks)
@@ -30,21 +30,18 @@ public class Console extends Renderable{
 			//TODO Göra till List istället för array
 			String[] consoleOut = output.split(Character.toString((char)10));
 			for(int i = 0; i < consoleOut.length; i++){
-				g.setColor(new Color(0,0,0,alpha));
-				g.drawString(consoleOut[i], 6+2, PlattformMP.WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20)+2);
-				g.drawString(consoleOut[i], 6-2, PlattformMP.WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20)-2);
 				g.setColor(new Color(255,255,255,alpha));
-				g.drawString(consoleOut[i], 6, PlattformMP.WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 20));
+				g.drawString(consoleOut[i], 6, PlattformMP.WINDOW_HEIGHT - 20- ((consoleOut.length-i) * 16));
 				g.setColor(Color.white);
 			}
 		}
 		if(isOn){
 			g.setColor(Color.darkGray);
-			//g.setFont(Fonts.arc);
 			g.fillRect(0,PlattformMP.WINDOW_HEIGHT-20,PlattformMP.WINDOW_WIDTH,PlattformMP.WINDOW_HEIGHT);
 			g.setColor(Color.white);
 			g.drawString("> " + input, 6, PlattformMP.WINDOW_HEIGHT-20);
-			g.drawLine(26+input.length()*9, PlattformMP.WINDOW_HEIGHT-20+2, 26+input.length()*9, PlattformMP.WINDOW_HEIGHT-2);
+			int inputWidth=PlattformMP.fontDefault.getWidth(input);
+			g.drawLine(26+inputWidth, PlattformMP.WINDOW_HEIGHT-20+2, 26+inputWidth, PlattformMP.WINDOW_HEIGHT-2);
 		}
 	}
 	

@@ -2,6 +2,8 @@ package jesper.edwin;
 
 
 import org.newdawn.slick.*; 
+import org.newdawn.slick.font.effects.ColorEffect;
+import org.newdawn.slick.font.effects.OutlineEffect;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,9 +20,11 @@ public class PlattformMP extends BasicGame {
 	public final int FPS = 60;
 	public static final int WINDOW_WIDTH = 640;
 	public static final int WINDOW_HEIGHT = 480;
-	private static final String WORK_DIR =System.getProperty("user.dir");
+	public static final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
+	private final String FONT_DIR = WORK_DIR + "/resources/fonts/";
 	Image sprWhiteBlock, sprPlayer, sprEntityTest, sprTriangle, sprTriangle2;
+	public static UnicodeFont fontDefault;
 	boolean initiated = false;
 	
 	static Console console = new Console();
@@ -29,18 +33,26 @@ public class PlattformMP extends BasicGame {
 	Keyboard keyboard = new Keyboard();
 	static GameContainer globalContainer;
 
-	
 	public PlattformMP() { 
 		super("PlattformMP"); 
 		} 
 	
-	@Override public void init(GameContainer container) throws SlickException {
-		
+	@Override public void init(GameContainer container) throws SlickException {		
 		sprWhiteBlock  = new Image(IMAGE_DIR + "whiteblock.png");
 		sprPlayer = new Image(IMAGE_DIR + "player.png");
 		sprEntityTest = new Image(IMAGE_DIR + "entity_test.png");
 		sprTriangle = new Image(IMAGE_DIR + "whitetriangle.png");
 		sprTriangle2 = new Image(IMAGE_DIR + "whitetriangle2.png");
+		
+		fontDefault = new UnicodeFont(FONT_DIR + "AndaleMono.ttf", 16, false, false);
+		fontDefault.addAsciiGlyphs();
+		fontDefault.addGlyphs(400, 600);
+		OutlineEffect fontOutline=new OutlineEffect();
+		fontOutline.setWidth(2);
+		fontDefault.getEffects().add(fontOutline);
+		fontDefault.getEffects().add(new ColorEffect());
+		fontDefault.loadGlyphs();
+		
 		player = new Player(new Entity(200, 70, sprPlayer), 0);
 		new Solid(180, 320, sprWhiteBlock);
 		new BasicCreature(260, 200, sprEntityTest);
@@ -83,7 +95,6 @@ public class PlattformMP extends BasicGame {
 	
 	
 	@Override public void render(GameContainer container, Graphics g) throws SlickException { 
-		
 		//TODO: Render prioritet som Game Makers depth
 	    Collections.sort(Renderable.list, new Comparator<Object>(){
 
@@ -157,10 +168,6 @@ public class PlattformMP extends BasicGame {
 		for(int i = 0; i < list.size(); i++){
 			g.drawString(list.get(i), 0, i*18);
 		}
-	}
-	
-	public static String getWorkDir(){
-		return WORK_DIR;
 	}
 	
 }
