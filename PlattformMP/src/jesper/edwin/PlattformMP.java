@@ -1,6 +1,5 @@
 package jesper.edwin; 
 
-
 import org.newdawn.slick.*; 
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.font.effects.OutlineEffect;
@@ -23,7 +22,7 @@ public class PlattformMP extends BasicGame {
 	public static final String WORK_DIR =System.getProperty("user.dir");
 	private final String IMAGE_DIR = WORK_DIR + "/resources/image/";
 	private final String FONT_DIR = WORK_DIR + "/resources/fonts/";
-	Image sprWhiteBlock, sprPlayer, sprEntityTest, sprTriangle, sprTriangle2;
+	Image sprWhiteBlock, sprPlayer, sprEntityTest, sprTriangle, sprTriangle2, sprTriangle3;
 	public static UnicodeFont fontDefault;
 	boolean initiated = false;
 	
@@ -31,6 +30,7 @@ public class PlattformMP extends BasicGame {
 	static Camera camera = new Camera();
 	
 	Keyboard keyboard = new Keyboard();
+	Mouse mouse = new Mouse();
 	static GameContainer globalContainer;
 
 	public PlattformMP() { 
@@ -43,6 +43,7 @@ public class PlattformMP extends BasicGame {
 		sprEntityTest = new Image(IMAGE_DIR + "entity_test.png");
 		sprTriangle = new Image(IMAGE_DIR + "whitetriangle.png");
 		sprTriangle2 = new Image(IMAGE_DIR + "whitetriangle2.png");
+		sprTriangle3 = new Image(IMAGE_DIR + "whitetriangle3.png");
 		
 		fontDefault = new UnicodeFont(FONT_DIR + "AndaleMono.ttf", 16, false, false);
 		fontDefault.addAsciiGlyphs();
@@ -70,6 +71,10 @@ public class PlattformMP extends BasicGame {
 			new SlopeTerrain(320 + 32*i, WINDOW_HEIGHT - 32*i, sprTriangle);
 		}
 		
+		for(int i = 0; i < 10; i++){
+			new SlopeTerrain(580 + 16*i, WINDOW_HEIGHT - 32*i, sprTriangle3);
+		}
+		
 		initiated = true;
 	} 
 	
@@ -79,6 +84,7 @@ public class PlattformMP extends BasicGame {
 		
 		if(!PlattformMP.PAUSE){
 			handleInput(container);
+			handleMouseInput(container);
 			List<GameObject> l = GameObject.list;
 			
 			for(int i = 0; i < l.size(); i++){
@@ -161,7 +167,10 @@ public class PlattformMP extends BasicGame {
 	
 	private void handleInput(GameContainer gc) throws SlickException {
 		gc.getInput().addKeyListener(keyboard);
-		
+	}
+	
+	private void handleMouseInput(GameContainer gc) throws SlickException {
+		gc.getInput().addMouseListener(mouse);
 	}
 	
 	public void drawList(Graphics g, List<String> list){
