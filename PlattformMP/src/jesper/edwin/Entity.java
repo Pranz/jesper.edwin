@@ -18,6 +18,8 @@ public class Entity extends InteractiveObject {
 	double maxFallSpeed = 5;
 	boolean solid = true;
 	double jumpStrength = 10;
+	int stepSize = 3;
+	int height = 0;
 	static List<Entity> list = new ArrayList<Entity>();
 	private static final double SQRT_2 = 1.41421;
 	
@@ -61,24 +63,21 @@ public class Entity extends InteractiveObject {
 		//X-movement, horizontal
 		int xdir = signum(xspeed);
 		double i;
-		for(i=0;i<Math.abs(floorTo0(xspeed));i++){ //Kollar om alla positioner inom xspeed framåt är lediga
-			if(!placeMeeting(x+xdir, y, Terrain.list)) //Om +1 är det...
-				this.x+=xdir; //...så rör den ett framåt
-
-			else{ //...annars
-				InteractiveObject conflict = getCollidedObject(x+xdir, y, Terrain.list);
-				if(!placeMeeting(x+xdir, y-1, conflict)){
-					x += xdir;
-					y -= 1;
-					i += SQRT_2 - 1;
-				}
-				else{
-					hspeed=0; //...sätt hspeed=0 och avbryt for-loop i förväg			
-					break;
-				}
-
+		for(i=0;i<Math.abs(floorTo0(xspeed));i++){
+			height = getHeightDifference(xdir);
+			if(Math.abs(height) < stepSize){
+				y += height;
+				x += xdir;
+				if(height <= 0)i += Math.abs(height)*(SQRT_2 - 1);
+						
 			}
+			else{
+				hspeed=0; //...sätt hspeed=0 och avbryt for-loop i förväg			
+				break;
+			}
+
 		}
+	
 		double xdecimals=(Math.abs(xspeed)-Math.abs(floorTo0(xspeed)))*xdir;
 		if(i>=Math.abs(floorTo0(xspeed))){ //Om den har lyckats flytta sig xspeed framåt i heltal då det är fritt xspeed antal pixlar framåt
 			if(!placeMeeting(x+xdir,y,Terrain.list))
@@ -127,12 +126,26 @@ public class Entity extends InteractiveObject {
 		vspeed = newVspeed;
 	}
 	
-	/*
-	 * TODO: Ej färdig kod, fixar sen, ville ladda upp Render bullshit.
-	 public int getHeightDifference(int direction){
-	 	if((!placeMeeting(x + direction, y, Terrain.list)) && (placeMeeting(x + direction, y + 1, Terrain.list))) return 0;
-		
-	}
-	*/
 
+	 public int getHeightDifference(int direction){
+		 if(!placeMeeting(x + direction, y, Terrain.list))//om man inte träffar någonting bara en pixel framåt
+	 	 {
+
+	 	 
+		 if(!placeMeeting(x + direction, y + stepSize, Terrain.list)) return 0;//om man befinner sig i luften, returnera 0
+		 else{
+	 		 for(int i = 0; i < stepSize; i++){ //annars, gå neråt tills man träffar mark och returnera hur långt ner man gick.
+	 			 if(placeMeeting(x + direction, y + i + 1, Terrain.list)) return i;
+	 		 }
+		 }
+	 	 }
+	 	 
+	 	 //om man träffar något
+	 	else for(int i = 0; i < stepSize; i++){
+	 		//gå uppåt tills man inte träffar något.
+	 		if(!placeMeeting(x + direction, y - i, Terrain.list)) return -i; 
+	 	}
+	 	return stepSize + 1;
+	}
+	 
 }

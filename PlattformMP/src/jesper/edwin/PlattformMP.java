@@ -127,6 +127,7 @@ public class PlattformMP extends BasicGame {
 		l.add("Console Timer: "+console.consoleTimer.ticks+" / "+console.consoleTimer.maxTicks);
 		l.add("Angle: " + GameObject.directionToPoint(player.ent.previousX, player.ent.previousY, player.ent.x, player.ent.y));
 		l.add("Camera: " + camera.getDrawX() + ","+camera.getDrawY());
+		l.add("Height difference: " + player.ent.height);
 		
 		drawList(g,l);
 		
