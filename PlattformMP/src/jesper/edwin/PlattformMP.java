@@ -38,6 +38,7 @@ public class PlattformMP extends BasicGame {
 		} 
 	
 	@Override public void init(GameContainer container) throws SlickException {		
+		
 		sprWhiteBlock  = new Image(IMAGE_DIR + "whiteblock.png");
 		sprPlayer = new Image(IMAGE_DIR + "player.png");
 		sprEntityTest = new Image(IMAGE_DIR + "entity_test.png");
@@ -68,11 +69,11 @@ public class PlattformMP extends BasicGame {
 		}
 		
 		for(int i = 0; i < 10; i++){
-			new SlopeTerrain(320 + 32*i, WINDOW_HEIGHT - 32*i, sprTriangle);
+			new SlopeTerrain(16*30 + 32*i - 1, WINDOW_HEIGHT - 32*i, sprTriangle);
 		}
 		
 		for(int i = 0; i < 10; i++){
-			new SlopeTerrain(580 + 16*i, WINDOW_HEIGHT - 32*i, sprTriangle3);
+			new SlopeTerrain(16*20 + 16*i - 1, WINDOW_HEIGHT - 32*i, sprTriangle3);
 		}
 		
 		initiated = true;

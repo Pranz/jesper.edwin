@@ -14,12 +14,13 @@ public class Entity extends InteractiveObject {
 	double vspeed = 0;
 	double speed = 1.5;
 	double friction = 0.3;
-	double maxSpeed = 4;
+	double maxSpeed = 7;
 	double maxFallSpeed = 5;
 	boolean solid = true;
-	double jumpStrength = 10;
-	int stepSize = 3;
-	int height = 0;
+	double jumpStrength = 14;
+	int stepSize = 4;
+	double height = 0;
+	double prvHeight = 0;
 	static List<Entity> list = new ArrayList<Entity>();
 	private static final double SQRT_2 = 1.41421;
 	
@@ -63,12 +64,15 @@ public class Entity extends InteractiveObject {
 		//X-movement, horizontal
 		int xdir = signum(xspeed);
 		double i;
+
 		for(i=0;i<Math.abs(floorTo0(xspeed));i++){
 			height = getHeightDifference(xdir);
-			if(Math.abs(height) < stepSize){
+			//if(height != prvHeight)System.out.println(""+height); debug
+			prvHeight = height;
+			if(Math.abs(height) < stepSize){ 
 				y += height;
 				x += xdir;
-				if(height <= 0)i += Math.abs(height)*(SQRT_2 - 1);
+				if(height < 0)i += Math.abs(height)*(SQRT_2 - 1);
 						
 			}
 			else{
@@ -108,8 +112,10 @@ public class Entity extends InteractiveObject {
 			else{
 				if(ydir==1)this.y=floorTo0(this.y);else this.y = ceilTo0(this.y);
 				vspeed=0;
+				
 			}
 		}
+		
 	}
 	
 	public void mainAttack(){
@@ -127,25 +133,24 @@ public class Entity extends InteractiveObject {
 	}
 	
 
-	 public int getHeightDifference(int direction){
+	 public double getHeightDifference(int direction){
 		 if(!placeMeeting(x + direction, y, Terrain.list))//om man inte träffar någonting bara en pixel framåt
 	 	 {
-
 	 	 
-		 if(!placeMeeting(x + direction, y + stepSize, Terrain.list)) return 0;//om man befinner sig i luften, returnera 0
+		 if(!placeMeeting(x + direction, y + stepSize + 1, Terrain.list)) return 0;//om man befinner sig i luften, returnera 0
 		 else{
-	 		 for(int i = 0; i < stepSize; i++){ //annars, gå neråt tills man träffar mark och returnera hur långt ner man gick.
+	 		 for(double i = 0; i < stepSize; i += 0.1){ //annars, gå neråt tills man träffar mark och returnera hur långt ner man gick.
 	 			 if(placeMeeting(x + direction, y + i + 1, Terrain.list)) return i;
 	 		 }
 		 }
 	 	 }
 	 	 
 	 	 //om man träffar något
-	 	else for(int i = 0; i < stepSize; i++){
+	 	else for(double i = 0; i < stepSize; i += 0.1){
 	 		//gå uppåt tills man inte träffar något.
 	 		if(!placeMeeting(x + direction, y - i, Terrain.list)) return -i; 
 	 	}
 	 	return stepSize + 1;
 	}
-	 
+	
 }
