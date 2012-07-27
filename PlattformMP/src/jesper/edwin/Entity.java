@@ -9,15 +9,15 @@ public class Entity extends InteractiveObject {
 	
 	Image image;
 	boolean organic;
-	double gravity = 0.42;
+	double gravity = 0.32;
 	double hspeed = 0;
 	double vspeed = 0;
-	double speed = 1.5;
+	double speed = 0.75;
 	double friction = 0.3;
-	double maxSpeed = 7;
+	double maxSpeed = 4;
 	double maxFallSpeed = 5;
 	boolean solid = true;
-	double jumpStrength = 14;
+	double jumpStrength = 7;
 	int stepSize = 4;
 	double height = 0;
 	double prvHeight = 0;
